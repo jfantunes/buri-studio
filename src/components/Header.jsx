@@ -10,9 +10,12 @@ export default function Header() {
     return (
       <header className="header header--home">
         <div className="header__pill">
-          <Link to="/" className="header__logo" aria-label={`${site?.name} — home`}>
-            <img src={site?.logo} alt={`${site?.name} logo`} />
-          </Link>
+          {site?.logo ? (
+            <img className="header__logo" src={site.logo} alt={`${site.name} logo`} />
+          ) : (
+            <span className="header__brand">{site?.name}</span>
+          )}
+          <span className="header__dot" aria-hidden="true" />
           <nav className="header__nav" aria-label="Main navigation">
             <NavLink to="/work">Work</NavLink>
             <NavLink to="/about">About</NavLink>

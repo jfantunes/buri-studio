@@ -8,38 +8,38 @@
     "slides": [
       {
         "alt": "Landscape photograph — hero 1",
-        "src": "/images/hero/hero-1-800.svg",
+        "src": "/images/hero/hero-1-800.jpg",
         "srcset": {
-          "480": "/images/hero/hero-1-480.svg",
-          "800": "/images/hero/hero-1-800.svg",
-          "1600": "/images/hero/hero-1-1600.svg"
+          "480": "/images/hero/hero-1-480.jpg",
+          "800": "/images/hero/hero-1-800.jpg",
+          "1600": "/images/hero/hero-1-1600.jpg"
         }
       },
       {
         "alt": "Landscape photograph — hero 2",
-        "src": "/images/hero/hero-2-800.svg",
+        "src": "/images/hero/hero-2-800.jpg",
         "srcset": {
-          "480": "/images/hero/hero-2-480.svg",
-          "800": "/images/hero/hero-2-800.svg",
-          "1600": "/images/hero/hero-2-1600.svg"
+          "480": "/images/hero/hero-2-480.jpg",
+          "800": "/images/hero/hero-2-800.jpg",
+          "1600": "/images/hero/hero-2-1600.jpg"
         }
       },
       {
         "alt": "Landscape photograph — hero 3",
-        "src": "/images/hero/hero-3-800.svg",
+        "src": "/images/hero/hero-3-800.jpg",
         "srcset": {
-          "480": "/images/hero/hero-3-480.svg",
-          "800": "/images/hero/hero-3-800.svg",
-          "1600": "/images/hero/hero-3-1600.svg"
+          "480": "/images/hero/hero-3-480.jpg",
+          "800": "/images/hero/hero-3-800.jpg",
+          "1600": "/images/hero/hero-3-1600.jpg"
         }
       },
       {
         "alt": "Landscape photograph — hero 4",
-        "src": "/images/hero/hero-4-800.svg",
+        "src": "/images/hero/hero-4-800.jpg",
         "srcset": {
-          "480": "/images/hero/hero-4-480.svg",
-          "800": "/images/hero/hero-4-800.svg",
-          "1600": "/images/hero/hero-4-1600.svg"
+          "480": "/images/hero/hero-4-480.jpg",
+          "800": "/images/hero/hero-4-800.jpg",
+          "1600": "/images/hero/hero-4-1600.jpg"
         }
       }
     ]

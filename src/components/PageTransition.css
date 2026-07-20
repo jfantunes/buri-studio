@@ -5,10 +5,27 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: var(--color-ink);
+  display: grid;
+  place-items: center;
+  background: var(--color-accent);
   transform: translateY(-102%);
   pointer-events: none;
   will-change: transform;
+}
+
+.page-shade__logo {
+  width: clamp(64px, 8vw, 104px);
+  height: clamp(64px, 8vw, 104px);
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+.page-shade__brand {
+  color: var(--color-bg);
+  font-size: clamp(13px, 1.4vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 .page-shade.is-covering,

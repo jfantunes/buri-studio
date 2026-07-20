@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Seo from '../components/Seo.jsx';
 import { useContent } from '../hooks/useContent.js';
 import './ContactPage.css';
@@ -5,17 +6,12 @@ import './ContactPage.css';
 export default function ContactPage() {
   const { contact } = useContent();
   const form = contact?.form ?? {};
+  const [submitted, setSubmitted] = useState(false);
 
-  // Opens the visitor's mail client pre-filled — no backend required.
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const name = data.get('name') || '';
-    const email = data.get('email') || '';
-    const message = data.get('message') || '';
-    const subject = encodeURIComponent(`Project inquiry — ${name}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-    window.location.href = `mailto:${contact?.email}?subject=${subject}&body=${body}`;
+    event.currentTarget.reset();
+    setSubmitted(true);
   };
 
   return (
@@ -30,11 +26,19 @@ export default function ContactPage() {
           <br />
           {contact?.phone}
         </p>
-        <form className="contact__form" onSubmit={handleSubmit}>
+        <form className="contact__form" action="https://api.web3forms.com/submit" method="POST" onSubmit={handleSubmit}>
+          <input type="hidden" name="access_key" defaultValue={form.web3formsAccessKey || ''} />
+          <input type="hidden" name="subject" defaultValue={form.subject || 'New project inquiry from Buri Studio'} />
+          <input type="hidden" name="from_name" defaultValue={form.fromName || 'Buri Studio website'} />
           <input name="name" type="text" placeholder={form.namePlaceholder || 'Name'} autoComplete="name" required />
           <input name="email" type="email" placeholder={form.emailPlaceholder || 'Email'} autoComplete="email" required />
           <textarea name="message" rows="4" placeholder={form.messagePlaceholder || 'Project details'} required />
           <button type="submit">{form.submitLabel || 'Send'}</button>
+          {submitted && (
+            <p className="contact__thanks" role="status">
+              {form.thanksMessage || 'Thanks for contacting Buri Studio. We will get back to you soon.'}
+            </p>
+          )}
         </form>
       </section>
     </>

@@ -11,6 +11,10 @@
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
     "messagePlaceholder": "Project details",
-    "submitLabel": "Send"
+    "submitLabel": "Send",
+    "web3formsAccessKey": "",
+    "subject": "New project inquiry from Buri Studio",
+    "fromName": "Buri Studio website",
+    "thanksMessage": "Thanks for contacting Buri Studio. We will get back to you soon."
   }
 }

@@ -14,29 +14,29 @@
       "images": [
         {
           "alt": "Meridian Courtyard — cover",
-          "src": "/images/projects/meridian-courtyard/cover-800.svg",
+          "src": "/images/projects/meridian-courtyard/cover-800.jpg",
           "srcset": {
-            "480": "/images/projects/meridian-courtyard/cover-480.svg",
-            "800": "/images/projects/meridian-courtyard/cover-800.svg",
-            "1600": "/images/projects/meridian-courtyard/cover-1600.svg"
+            "480": "/images/projects/meridian-courtyard/cover-480.jpg",
+            "800": "/images/projects/meridian-courtyard/cover-800.jpg",
+            "1600": "/images/projects/meridian-courtyard/cover-1600.jpg"
           }
         },
         {
           "alt": "Meridian Courtyard — detail 1",
-          "src": "/images/projects/meridian-courtyard/detail-1-800.svg",
+          "src": "/images/projects/meridian-courtyard/detail-1-800.jpg",
           "srcset": {
-            "480": "/images/projects/meridian-courtyard/detail-1-480.svg",
-            "800": "/images/projects/meridian-courtyard/detail-1-800.svg",
-            "1600": "/images/projects/meridian-courtyard/detail-1-1600.svg"
+            "480": "/images/projects/meridian-courtyard/detail-1-480.jpg",
+            "800": "/images/projects/meridian-courtyard/detail-1-800.jpg",
+            "1600": "/images/projects/meridian-courtyard/detail-1-1600.jpg"
           }
         },
         {
           "alt": "Meridian Courtyard — detail 2",
-          "src": "/images/projects/meridian-courtyard/detail-2-800.svg",
+          "src": "/images/projects/meridian-courtyard/detail-2-800.jpg",
           "srcset": {
-            "480": "/images/projects/meridian-courtyard/detail-2-480.svg",
-            "800": "/images/projects/meridian-courtyard/detail-2-800.svg",
-            "1600": "/images/projects/meridian-courtyard/detail-2-1600.svg"
+            "480": "/images/projects/meridian-courtyard/detail-2-480.jpg",
+            "800": "/images/projects/meridian-courtyard/detail-2-800.jpg",
+            "1600": "/images/projects/meridian-courtyard/detail-2-1600.jpg"
           }
         }
       ]
@@ -51,38 +51,38 @@
       "images": [
         {
           "alt": "Two Rivers Park — cover",
-          "src": "/images/projects/two-rivers-park/cover-800.svg",
+          "src": "/images/projects/two-rivers-park/cover-800.jpg",
           "srcset": {
-            "480": "/images/projects/two-rivers-park/cover-480.svg",
-            "800": "/images/projects/two-rivers-park/cover-800.svg",
-            "1600": "/images/projects/two-rivers-park/cover-1600.svg"
+            "480": "/images/projects/two-rivers-park/cover-480.jpg",
+            "800": "/images/projects/two-rivers-park/cover-800.jpg",
+            "1600": "/images/projects/two-rivers-park/cover-1600.jpg"
           }
         },
         {
           "alt": "Two Rivers Park — detail 1",
-          "src": "/images/projects/two-rivers-park/detail-1-800.svg",
+          "src": "/images/projects/two-rivers-park/detail-1-800.jpg",
           "srcset": {
-            "480": "/images/projects/two-rivers-park/detail-1-480.svg",
-            "800": "/images/projects/two-rivers-park/detail-1-800.svg",
-            "1600": "/images/projects/two-rivers-park/detail-1-1600.svg"
+            "480": "/images/projects/two-rivers-park/detail-1-480.jpg",
+            "800": "/images/projects/two-rivers-park/detail-1-800.jpg",
+            "1600": "/images/projects/two-rivers-park/detail-1-1600.jpg"
           }
         },
         {
           "alt": "Two Rivers Park — detail 2",
-          "src": "/images/projects/two-rivers-park/detail-2-800.svg",
+          "src": "/images/projects/two-rivers-park/detail-2-800.jpg",
           "srcset": {
-            "480": "/images/projects/two-rivers-park/detail-2-480.svg",
-            "800": "/images/projects/two-rivers-park/detail-2-800.svg",
-            "1600": "/images/projects/two-rivers-park/detail-2-1600.svg"
+            "480": "/images/projects/two-rivers-park/detail-2-480.jpg",
+            "800": "/images/projects/two-rivers-park/detail-2-800.jpg",
+            "1600": "/images/projects/two-rivers-park/detail-2-1600.jpg"
           }
         },
         {
           "alt": "Two Rivers Park — detail 3",
-          "src": "/images/projects/two-rivers-park/detail-3-800.svg",
+          "src": "/images/projects/two-rivers-park/detail-3-800.jpg",
           "srcset": {
-            "480": "/images/projects/two-rivers-park/detail-3-480.svg",
-            "800": "/images/projects/two-rivers-park/detail-3-800.svg",
-            "1600": "/images/projects/two-rivers-park/detail-3-1600.svg"
+            "480": "/images/projects/two-rivers-park/detail-3-480.jpg",
+            "800": "/images/projects/two-rivers-park/detail-3-800.jpg",
+            "1600": "/images/projects/two-rivers-park/detail-3-1600.jpg"
           }
         }
       ]
@@ -97,20 +97,20 @@
       "images": [
         {
           "alt": "Sable Ridge Garden — cover",
-          "src": "/images/projects/sable-ridge-garden/cover-800.svg",
+          "src": "/images/projects/sable-ridge-garden/cover-800.jpg",
           "srcset": {
-            "480": "/images/projects/sable-ridge-garden/cover-480.svg",
-            "800": "/images/projects/sable-ridge-garden/cover-800.svg",
-            "1600": "/images/projects/sable-ridge-garden/cover-1600.svg"
+            "480": "/images/projects/sable-ridge-garden/cover-480.jpg",
+            "800": "/images/projects/sable-ridge-garden/cover-800.jpg",
+            "1600": "/images/projects/sable-ridge-garden/cover-1600.jpg"
           }
         },
         {
           "alt": "Sable Ridge Garden — detail 1",
-          "src": "/images/projects/sable-ridge-garden/detail-1-800.svg",
+          "src": "/images/projects/sable-ridge-garden/detail-1-800.jpg",
           "srcset": {
-            "480": "/images/projects/sable-ridge-garden/detail-1-480.svg",
-            "800": "/images/projects/sable-ridge-garden/detail-1-800.svg",
-            "1600": "/images/projects/sable-ridge-garden/detail-1-1600.svg"
+            "480": "/images/projects/sable-ridge-garden/detail-1-480.jpg",
+            "800": "/images/projects/sable-ridge-garden/detail-1-800.jpg",
+            "1600": "/images/projects/sable-ridge-garden/detail-1-1600.jpg"
           }
         }
       ]
@@ -125,29 +125,29 @@
       "images": [
         {
           "alt": "Northlight Terrace — cover",
-          "src": "/images/projects/northlight-terrace/cover-800.svg",
+          "src": "/images/projects/northlight-terrace/cover-800.jpg",
           "srcset": {
-            "480": "/images/projects/northlight-terrace/cover-480.svg",
-            "800": "/images/projects/northlight-terrace/cover-800.svg",
-            "1600": "/images/projects/northlight-terrace/cover-1600.svg"
+            "480": "/images/projects/northlight-terrace/cover-480.jpg",
+            "800": "/images/projects/northlight-terrace/cover-800.jpg",
+            "1600": "/images/projects/northlight-terrace/cover-1600.jpg"
           }
         },
         {
           "alt": "Northlight Terrace — detail 1",
-          "src": "/images/projects/northlight-terrace/detail-1-800.svg",
+          "src": "/images/projects/northlight-terrace/detail-1-800.jpg",
           "srcset": {
-            "480": "/images/projects/northlight-terrace/detail-1-480.svg",
-            "800": "/images/projects/northlight-terrace/detail-1-800.svg",
-            "1600": "/images/projects/northlight-terrace/detail-1-1600.svg"
+            "480": "/images/projects/northlight-terrace/detail-1-480.jpg",
+            "800": "/images/projects/northlight-terrace/detail-1-800.jpg",
+            "1600": "/images/projects/northlight-terrace/detail-1-1600.jpg"
           }
         },
         {
           "alt": "Northlight Terrace — detail 2",
-          "src": "/images/projects/northlight-terrace/detail-2-800.svg",
+          "src": "/images/projects/northlight-terrace/detail-2-800.jpg",
           "srcset": {
-            "480": "/images/projects/northlight-terrace/detail-2-480.svg",
-            "800": "/images/projects/northlight-terrace/detail-2-800.svg",
-            "1600": "/images/projects/northlight-terrace/detail-2-1600.svg"
+            "480": "/images/projects/northlight-terrace/detail-2-480.jpg",
+            "800": "/images/projects/northlight-terrace/detail-2-800.jpg",
+            "1600": "/images/projects/northlight-terrace/detail-2-1600.jpg"
           }
         }
       ]
@@ -162,29 +162,29 @@
       "images": [
         {
           "alt": "Aurora Wetlands — cover render",
-          "src": "/images/projects/aurora-wetlands/cover-800.svg",
+          "src": "/images/projects/aurora-wetlands/cover-800.jpg",
           "srcset": {
-            "480": "/images/projects/aurora-wetlands/cover-480.svg",
-            "800": "/images/projects/aurora-wetlands/cover-800.svg",
-            "1600": "/images/projects/aurora-wetlands/cover-1600.svg"
+            "480": "/images/projects/aurora-wetlands/cover-480.jpg",
+            "800": "/images/projects/aurora-wetlands/cover-800.jpg",
+            "1600": "/images/projects/aurora-wetlands/cover-1600.jpg"
           }
         },
         {
           "alt": "Aurora Wetlands — detail render 1",
-          "src": "/images/projects/aurora-wetlands/detail-1-800.svg",
+          "src": "/images/projects/aurora-wetlands/detail-1-800.jpg",
           "srcset": {
-            "480": "/images/projects/aurora-wetlands/detail-1-480.svg",
-            "800": "/images/projects/aurora-wetlands/detail-1-800.svg",
-            "1600": "/images/projects/aurora-wetlands/detail-1-1600.svg"
+            "480": "/images/projects/aurora-wetlands/detail-1-480.jpg",
+            "800": "/images/projects/aurora-wetlands/detail-1-800.jpg",
+            "1600": "/images/projects/aurora-wetlands/detail-1-1600.jpg"
           }
         },
         {
           "alt": "Aurora Wetlands — detail render 2",
-          "src": "/images/projects/aurora-wetlands/detail-2-800.svg",
+          "src": "/images/projects/aurora-wetlands/detail-2-800.jpg",
           "srcset": {
-            "480": "/images/projects/aurora-wetlands/detail-2-480.svg",
-            "800": "/images/projects/aurora-wetlands/detail-2-800.svg",
-            "1600": "/images/projects/aurora-wetlands/detail-2-1600.svg"
+            "480": "/images/projects/aurora-wetlands/detail-2-480.jpg",
+            "800": "/images/projects/aurora-wetlands/detail-2-800.jpg",
+            "1600": "/images/projects/aurora-wetlands/detail-2-1600.jpg"
           }
         }
       ]
@@ -199,20 +199,20 @@
       "images": [
         {
           "alt": "Cedar Hollow Residence — cover render",
-          "src": "/images/projects/cedar-hollow-residence/cover-800.svg",
+          "src": "/images/projects/cedar-hollow-residence/cover-800.jpg",
           "srcset": {
-            "480": "/images/projects/cedar-hollow-residence/cover-480.svg",
-            "800": "/images/projects/cedar-hollow-residence/cover-800.svg",
-            "1600": "/images/projects/cedar-hollow-residence/cover-1600.svg"
+            "480": "/images/projects/cedar-hollow-residence/cover-480.jpg",
+            "800": "/images/projects/cedar-hollow-residence/cover-800.jpg",
+            "1600": "/images/projects/cedar-hollow-residence/cover-1600.jpg"
           }
         },
         {
           "alt": "Cedar Hollow Residence — detail render 1",
-          "src": "/images/projects/cedar-hollow-residence/detail-1-800.svg",
+          "src": "/images/projects/cedar-hollow-residence/detail-1-800.jpg",
           "srcset": {
-            "480": "/images/projects/cedar-hollow-residence/detail-1-480.svg",
-            "800": "/images/projects/cedar-hollow-residence/detail-1-800.svg",
-            "1600": "/images/projects/cedar-hollow-residence/detail-1-1600.svg"
+            "480": "/images/projects/cedar-hollow-residence/detail-1-480.jpg",
+            "800": "/images/projects/cedar-hollow-residence/detail-1-800.jpg",
+            "1600": "/images/projects/cedar-hollow-residence/detail-1-1600.jpg"
           }
         }
       ]

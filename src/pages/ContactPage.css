@@ -55,6 +55,13 @@
   opacity: 0.9;
 }
 
+.contact__thanks {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 @media (max-width: 600px) {
   .contact__details {
     font-size: 18px;

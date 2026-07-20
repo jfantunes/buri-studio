@@ -6,11 +6,11 @@
   "heading": "About",
   "portrait": {
     "alt": "Studio portrait",
-    "src": "/images/portrait-800.svg",
+    "src": "/images/portrait-800.jpg",
     "srcset": {
-      "480": "/images/portrait-480.svg",
-      "800": "/images/portrait-800.svg",
-      "1200": "/images/portrait-1200.svg"
+      "480": "/images/portrait-480.jpg",
+      "800": "/images/portrait-800.jpg",
+      "1200": "/images/portrait-1200.jpg"
     }
   },
   "bio": "Buri Studio is a landscape architecture practice working across residential gardens, public parks, and rooftop terraces. Alongside built work, we produce 3D visualizations for architects and developers who need to see a space before it exists.",

@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { usePageTransition } from '../hooks/usePageTransition.js';
+import { useContent } from '../hooks/useContent.js';
 import HomePage from '../pages/HomePage.jsx';
 import WorkPage from '../pages/WorkPage.jsx';
 import ProjectPage from '../pages/ProjectPage.jsx';
@@ -14,6 +15,7 @@ import './PageTransition.css';
  * away to reveal the new page. Timings/easing live in PageTransition.css.
  */
 export default function PageTransition({ lenisRef }) {
+  const { site } = useContent();
   const { displayedLocation, stage, handleShadeTransitionEnd } = usePageTransition(lenisRef);
 
   return (
@@ -32,7 +34,13 @@ export default function PageTransition({ lenisRef }) {
         className={`page-shade${stage === 'idle' ? '' : ` is-${stage}`}`}
         onTransitionEnd={handleShadeTransitionEnd}
         aria-hidden="true"
-      />
+      >
+        {site?.logo ? (
+          <img className="page-shade__logo" src={site.logo} alt="" />
+        ) : (
+          <span className="page-shade__brand">buri studio</span>
+        )}
+      </div>
     </>
   );
 }
