@@ -34,6 +34,14 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 72px 40px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.work__grid.is-fading {
+  opacity: 0;
+  transform: translateY(8px);
 }
 
 @media (max-width: 700px) {
@@ -45,5 +53,16 @@
   .work__grid {
     grid-template-columns: 1fr;
     gap: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work__grid {
+    transition: none;
+  }
+
+  .work__grid.is-fading {
+    opacity: 1;
+    transform: none;
   }
 }
