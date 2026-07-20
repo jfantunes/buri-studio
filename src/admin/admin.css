@@ -29,6 +29,7 @@ body {
 
 button,
 input,
+select,
 textarea {
   font: inherit;
 }
@@ -406,7 +407,7 @@ a {
 .panel,
 .metric,
 .image-card,
-.project-list {
+.project-picker {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(251, 250, 246, 0.78);
@@ -447,7 +448,7 @@ a {
 .form-grid,
 .image-card__topline {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
@@ -507,56 +508,29 @@ a {
   object-fit: cover;
 }
 
-.srcset-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-}
-
 .project-layout {
   display: grid;
-  grid-template-columns: minmax(210px, 270px) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
-.project-list {
-  align-self: start;
-  padding: 8px;
-}
-
-.project-list__item {
-  width: 100%;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--muted);
-  padding: 10px;
-  text-align: left;
-}
-
-.project-list__item strong,
-.project-list__item span {
-  display: block;
-}
-
-.project-list__item strong {
-  color: var(--ink);
-  font-weight: 650;
-}
-
-.project-list__item span {
-  margin-top: 3px;
-  font-size: 0.8rem;
-}
-
-.project-list__item.is-active {
-  border-color: var(--line);
-  background: rgba(255, 254, 250, 0.82);
+.project-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px;
 }
 
 .project-title {
   margin-bottom: 16px;
   font-size: clamp(2rem, 4vw, 3.8rem);
+}
+
+.image-card__hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
 }
 
 .social-list {
@@ -643,7 +617,7 @@ a {
   .form-grid,
   .image-card__topline,
   .metrics,
-  .srcset-grid,
+  .project-picker,
   .social-row {
     grid-template-columns: 1fr;
   }

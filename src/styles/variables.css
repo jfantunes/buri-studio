@@ -14,7 +14,7 @@
   --section-top: 128px;
   --section-bottom: 130px;
 
-  --shade-duration: 480ms;
+  --shade-duration: 700ms;
   --shade-ease: cubic-bezier(0.65, 0, 0.35, 1);
 }
 

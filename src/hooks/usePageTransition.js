@@ -2,12 +2,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
-const FALLBACK_MS = 900;
+const COVER_HOLD_MS = 450;
+const FALLBACK_MS = 1700;
 
 /**
  * Drives the "shade" page transition:
  *   idle → covering (shade slides down over the old page)
- *        → swap route content + jump scroll to top
+ *        → covered (swap route content + jump scroll to top + hold logo)
  *        → revealing (shade lifts away over the new page) → idle
  *
  * Returns the location that should currently be rendered (the old page stays
@@ -19,6 +20,7 @@ export function usePageTransition(lenisRef) {
   const [stage, setStage] = useState('idle');
   const pendingRef = useRef(null);
   const stageRef = useRef(stage);
+  const holdTimerRef = useRef(null);
   stageRef.current = stage;
 
   const scrollToTop = useCallback(() => {
@@ -39,6 +41,7 @@ export function usePageTransition(lenisRef) {
       scrollToTop();
       return;
     }
+    window.clearTimeout(holdTimerRef.current);
     pendingRef.current = location;
     setStage('covering');
   }, [location, scrollToTop]);
@@ -49,7 +52,7 @@ export function usePageTransition(lenisRef) {
       pendingRef.current = null;
       if (next) setDisplayedLocation(next);
       scrollToTop();
-      setStage('revealing');
+      setStage('covered');
     } else if (stageRef.current === 'revealing') {
       setStage('idle');
     }
@@ -63,9 +66,15 @@ export function usePageTransition(lenisRef) {
     [advance]
   );
 
+  useEffect(() => {
+    if (stage !== 'covered') return undefined;
+    holdTimerRef.current = window.setTimeout(() => setStage('revealing'), COVER_HOLD_MS);
+    return () => window.clearTimeout(holdTimerRef.current);
+  }, [stage]);
+
   // Safety net in case transitionend never fires (hidden tab, etc.).
   useEffect(() => {
-    if (stage === 'idle') return undefined;
+    if (stage !== 'covering' && stage !== 'revealing') return undefined;
     const id = window.setTimeout(advance, FALLBACK_MS);
     return () => window.clearTimeout(id);
   }, [stage, advance]);

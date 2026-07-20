@@ -29,12 +29,18 @@
 }
 
 .page-shade.is-covering,
+.page-shade.is-covered,
 .page-shade.is-revealing {
-  transition: transform var(--shade-duration) var(--shade-ease);
   pointer-events: auto;
 }
 
-.page-shade.is-covering {
+.page-shade.is-covering,
+.page-shade.is-revealing {
+  transition: transform var(--shade-duration) var(--shade-ease);
+}
+
+.page-shade.is-covering,
+.page-shade.is-covered {
   transform: translateY(0);
 }
 

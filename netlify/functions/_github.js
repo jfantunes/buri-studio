@@ -9,7 +9,7 @@ const JSON_PATHS = [
 
 const JSON_PATH_SET = new Set(JSON_PATHS);
 const MAX_JSON_BYTES = 600 * 1024;
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+const MAX_IMAGE_BYTES = 6 * 1024 * 1024;
 const GITHUB_OWNER = 'jfantunes';
 const GITHUB_REPO = 'buri-studio';
 const GITHUB_BRANCH = 'main';
@@ -103,7 +103,7 @@ export async function commitContentUpdate({ files, uploads = [], message }) {
     const content = String(upload.contentBase64 || '').replace(/^data:image\/[a-z0-9.+-]+;base64,/i, '');
     const bytes = Buffer.byteLength(content, 'base64');
     if (!content || bytes > MAX_IMAGE_BYTES) {
-      throw new Error(`${upload.path} is empty or larger than 5 MB`);
+      throw new Error(`${upload.path} is empty or larger than 6 MB`);
     }
 
     const blob = await githubFetch('/git/blobs', {

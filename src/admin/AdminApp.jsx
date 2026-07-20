@@ -8,8 +8,9 @@ const ENDPOINTS = {
 };
 
 const DEPLOY_FINAL_STATES = new Set(['ready', 'error']);
-const RESPONSIVE_WIDTHS = [480, 800, 1200, 1600, 2560, 3840];
-const FALLBACK_IMAGE_WIDTH = 1600;
+const MAX_UPLOAD_BYTES = 6 * 1024 * 1024;
+const MIN_UPLOAD_WIDTH = 2560;
+const FOUR_K_WIDTH = 3840;
 
 const NAV = [
   ['dashboard', 'Overview'],
@@ -65,21 +66,6 @@ function ensureImageObject(root, path) {
   return getPath(root, path);
 }
 
-function getResponsiveWidths(srcset = {}) {
-  const existingWidths = Object.keys(srcset).map(Number).filter(Number.isFinite);
-  return [...new Set(RESPONSIVE_WIDTHS.concat(existingWidths))].sort((a, b) => a - b);
-}
-
-function setImageSrcsetValue(image, width, value) {
-  image.srcset ??= {};
-  if (value) {
-    image.srcset[width] = value;
-  } else {
-    delete image.srcset[width];
-    if (Object.keys(image.srcset).length === 0) delete image.srcset;
-  }
-}
-
 async function api(endpoint, options = {}) {
   const response = await fetch(endpoint, {
     credentials: 'include',
@@ -94,16 +80,6 @@ async function api(endpoint, options = {}) {
   return data;
 }
 
-function imageVariantWidths(sourceWidth) {
-  const widths = RESPONSIVE_WIDTHS.filter((width) => width <= sourceWidth);
-  if (!widths.includes(sourceWidth) && sourceWidth < RESPONSIVE_WIDTHS.at(-1)) widths.push(sourceWidth);
-  return [...new Set(widths.length ? widths : [sourceWidth])].sort((a, b) => a - b);
-}
-
-function fallbackImageUrl(variants) {
-  return variants.find((variant) => variant.width === FALLBACK_IMAGE_WIDTH)?.publicUrl || variants.at(-1)?.publicUrl || '';
-}
-
 function blobToBase64(blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -113,17 +89,17 @@ function blobToBase64(blob) {
   });
 }
 
-async function createImageVariant(bitmap, width, baseName) {
+async function createUploadImage(bitmap, width, baseName) {
   const scale = Math.min(1, width / bitmap.width);
   const canvas = document.createElement('canvas');
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
   canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/webp', 0.84));
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/webp', 0.86));
   if (!blob) throw new Error('Could not optimize this image.');
+  if (blob.size > MAX_UPLOAD_BYTES) throw new Error('Optimized image is larger than 6 MB. Please choose a smaller file.');
   const filename = `${baseName}-${canvas.width}.webp`;
   return {
-    width: canvas.width,
     path: `public/images/uploads/${filename}`,
     publicUrl: `/images/uploads/${filename}`,
     contentBase64: await blobToBase64(blob)
@@ -132,15 +108,16 @@ async function createImageVariant(bitmap, width, baseName) {
 
 async function optimizeImage(file) {
   if (!file.type.startsWith('image/')) throw new Error('Please choose an image file.');
+  if (file.size > MAX_UPLOAD_BYTES) throw new Error('Please choose an image smaller than 6 MB.');
   const bitmap = await createImageBitmap(file);
+  if (bitmap.width < MIN_UPLOAD_WIDTH) {
+    bitmap.close?.();
+    throw new Error('Please upload an image that is at least 2560px wide.');
+  }
   const baseName = `${Date.now()}-${slugify(file.name.replace(/\.[^.]+$/, ''))}`;
-  const variants = await Promise.all(imageVariantWidths(bitmap.width).map((width) => createImageVariant(bitmap, width, baseName)));
+  const upload = await createUploadImage(bitmap, bitmap.width >= FOUR_K_WIDTH ? FOUR_K_WIDTH : MIN_UPLOAD_WIDTH, baseName);
   bitmap.close?.();
-  return {
-    uploads: variants.map(({ path, contentBase64 }) => ({ path, contentBase64 })),
-    publicUrl: fallbackImageUrl(variants),
-    srcset: Object.fromEntries(variants.map((variant) => [String(variant.width), variant.publicUrl]))
-  };
+  return upload;
 }
 
 function deployLabel(stateName) {
@@ -184,10 +161,8 @@ function TextArea({ path, label, value, onChange, rows }) {
   );
 }
 
-function ImageField({ image, label, path, removable, onAlt, onSrc, onSrcset, onUpload, onRemove, onClear }) {
-  const imageObject = typeof image === 'string' ? { src: image, alt: '', srcset: {} } : image || {};
-  const srcset = imageObject.srcset || {};
-  const responsiveWidths = getResponsiveWidths(srcset);
+function ImageField({ image, label, path, removable, onAlt, onUpload, onRemove, onClear }) {
+  const imageObject = typeof image === 'string' ? { src: image, alt: '' } : image || {};
 
   async function handleFile(event) {
     const file = event.target.files?.[0];
@@ -201,19 +176,11 @@ function ImageField({ image, label, path, removable, onAlt, onSrc, onSrcset, onU
       <div className="image-card__body">
         <div className="image-card__topline">
           <Field path={path} label={`${label} alt text`} value={imageObject.alt || ''} onChange={onAlt} />
-          <Field path={path} label="Fallback image URL" value={imageObject.src || ''} placeholder="/images/uploads/example-1600.webp" onChange={onSrc} />
         </div>
-        <div className="srcset-grid">
-          {responsiveWidths.map((width) => (
-            <label className="field" key={width}>
-              <span>{width}w URL</span>
-              <input className="control" value={srcset[width] || ''} placeholder={`/images/uploads/example-${width}.webp`} onChange={(event) => onSrcset(path, String(width), event.target.value)} />
-            </label>
-          ))}
-        </div>
+        <p className="image-card__hint">Upload one 2K or 4K WebP/JPG/PNG source. Smaller responsive files are generated during the site build.</p>
         <div className="image-card__actions">
           <label className="button button--ghost button--file">
-            Upload responsive image
+            Upload 2K/4K image
             <input className="hidden-input" type="file" accept="image/jpeg,image/png,image/webp" onChange={handleFile} />
           </label>
           {removable ? (
@@ -395,29 +362,16 @@ export default function AdminApp() {
     });
   }
 
-  function updateImageSrc(path, value) {
-    updateContent((next) => {
-      ensureImageObject(next, path).src = value;
-    });
-  }
-
-  function updateImageSrcset(path, width, value) {
-    updateContent((next) => {
-      setImageSrcsetValue(ensureImageObject(next, path), width, value);
-    });
-  }
-
   async function uploadImage(path, file) {
     try {
       const upload = await optimizeImage(file);
       updateContent((next) => {
         const image = ensureImageObject(next, path);
         image.src = upload.publicUrl;
-        image.srcset = upload.srcset;
+        delete image.srcset;
       });
-      const uploadPaths = new Set(upload.uploads.map((item) => item.path));
-      setUploads((current) => current.filter((item) => !uploadPaths.has(item.path)).concat(upload.uploads));
-      showToast('Responsive image variants are ready to save.');
+      setUploads((current) => current.filter((item) => item.path !== upload.path).concat({ path: upload.path, contentBase64: upload.contentBase64 }));
+      showToast('High-resolution image is ready to save.');
     } catch (error) {
       showToast(error.message, 'error');
     }
@@ -552,7 +506,7 @@ export default function AdminApp() {
   if (!content) return <div className="notice">Content could not be loaded.</div>;
 
   const [title, copy] = SECTION_TITLES[section];
-  const imageHandlers = { onAlt: updateImageAlt, onSrc: updateImageSrc, onSrcset: updateImageSrcset, onUpload: uploadImage, onRemove: removeImage, onClear: clearImage };
+  const imageHandlers = { onAlt: updateImageAlt, onUpload: uploadImage, onRemove: removeImage, onClear: clearImage };
 
   return (
     <div className="admin">
@@ -622,7 +576,7 @@ function Dashboard({ content, uploads }) {
         <div className="metric"><span>Pending files</span><strong>{uploads.length}</strong></div>
       </div>
       <div className="panel panel--half"><h2>Save flow</h2><p className="notice">Saves send JSON and optimized media to Netlify Functions, commit to GitHub, then trigger a production build.</p></div>
-      <div className="panel panel--half"><h2>Image handling</h2><p className="notice">Uploads generate responsive WebP files for mobile, desktop, 2K, and 4K screens under <code>public/images/uploads/</code>.</p></div>
+      <div className="panel panel--half"><h2>Image handling</h2><p className="notice">Upload one 2K or 4K source image under 6 MB. The build generates smaller responsive files automatically.</p></div>
     </section>
   );
 }
@@ -700,15 +654,15 @@ function ProjectsSection({ content, selectedProject, onSelectProject, onChange, 
   const project = projects[selectedProject];
   return (
     <section className="project-layout">
-      <aside className="project-list">
-        {projects.map((item, index) => (
-          <button className={`project-list__item${index === selectedProject ? ' is-active' : ''}`} type="button" key={item.slug || index} onClick={() => onSelectProject(index)}>
-            <strong>{item.title || 'Untitled project'}</strong>
-            <span>{item.category || 'No category'} / {item.year || ''}</span>
-          </button>
-        ))}
-        <button className="button button--accent button--wide" type="button" onClick={onAddProject}>Add project</button>
-      </aside>
+      <div className="project-picker panel">
+        <label className="field">
+          <span>Selected project</span>
+          <select className="control" value={selectedProject} onChange={(event) => onSelectProject(Number(event.target.value))}>
+            {projects.map((item, index) => <option key={item.slug || index} value={index}>{item.title || 'Untitled project'} - {item.year || 'No year'}</option>)}
+          </select>
+        </label>
+        <button className="button button--accent" type="button" onClick={onAddProject}>Add project</button>
+      </div>
       <div className="panel">{project ? <ProjectEditor project={project} index={selectedProject} onChange={onChange} onRemoveProject={onRemoveProject} onAddProjectImage={onAddProjectImage} imageHandlers={imageHandlers} /> : <p className="notice">Add a project to begin.</p>}</div>
     </section>
   );
