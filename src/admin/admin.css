@@ -559,6 +559,22 @@ a {
   font-size: clamp(2rem, 4vw, 3.8rem);
 }
 
+.social-list {
+  display: grid;
+  gap: 10px;
+}
+
+.social-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 254, 250, 0.52);
+  padding: 10px;
+}
+
 .panel-actions {
   margin-top: 12px;
 }
@@ -627,7 +643,8 @@ a {
   .form-grid,
   .image-card__topline,
   .metrics,
-  .srcset-grid {
+  .srcset-grid,
+  .social-row {
     grid-template-columns: 1fr;
   }
 

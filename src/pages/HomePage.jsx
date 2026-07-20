@@ -1,11 +1,13 @@
 import Seo from '../components/Seo.jsx';
 import HeroSlideshow from '../components/HeroSlideshow.jsx';
 import { useContent } from '../hooks/useContent.js';
+import { socialLinks } from '../utils/socials.js';
 import './HomePage.css';
 
 export default function HomePage() {
   const { site, homepage, contact } = useContent();
   const base = (site?.seo?.siteUrl || '').replace(/\/+$/, '');
+  const sameAs = socialLinks(site).map((social) => social.url);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -17,7 +19,7 @@ export default function HomePage() {
     email: contact?.email,
     telephone: contact?.phone,
     address: contact?.location,
-    sameAs: site?.instagramUrl ? [site.instagramUrl] : undefined
+    sameAs: sameAs.length > 0 ? sameAs : undefined
   };
 
   return (

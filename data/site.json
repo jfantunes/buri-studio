@@ -2,8 +2,13 @@
   "name": "Buri Studio",
   "tagline": "Landscape Architecture & Visualization",
   "logo": "",
-  "instagram": "@buristudio",
-  "instagramUrl": "https://instagram.com/buristudio",
+  "socials": [
+    {
+      "label": "Instagram",
+      "handle": "@buristudio",
+      "url": "https://instagram.com/buristudio"
+    }
+  ],
   "seo": {
     "siteUrl": "https://www.buristudio.com",
     "titleTemplate": "Buri Studio",

@@ -454,6 +454,20 @@ export default function AdminApp() {
     });
   }
 
+  function addSocial() {
+    updateContent((next) => {
+      next.site.socials ??= [];
+      next.site.socials.push({ label: '', handle: '', url: '' });
+    });
+  }
+
+  function removeSocial(index) {
+    updateContent((next) => {
+      next.site.socials ??= [];
+      next.site.socials.splice(index, 1);
+    });
+  }
+
   function clearImage(path) {
     updateContent((next) => {
       const image = ensureImageObject(next, path);
@@ -568,6 +582,8 @@ export default function AdminApp() {
           onAddProject={addProject}
           onRemoveProject={removeProject}
           onAddProjectImage={addProjectImage}
+          onAddSocial={addSocial}
+          onRemoveSocial={removeSocial}
           imageHandlers={imageHandlers}
         />
       </main>
@@ -611,15 +627,14 @@ function Dashboard({ content, uploads }) {
   );
 }
 
-function SiteSection({ content, onChange }) {
+function SiteSection({ content, onChange, onAddSocial, onRemoveSocial }) {
+  const socials = content.site?.socials || [];
   return (
     <section className="grid">
       <div className="panel panel--half"><h2>Identity</h2><div className="form-grid">
         <Field path="site.name" label="Studio name" value={getPath(content, 'site.name')} onChange={onChange} />
         <Field path="site.tagline" label="Tagline" value={getPath(content, 'site.tagline')} onChange={onChange} />
         <Field path="site.logo" label="Logo URL" value={getPath(content, 'site.logo')} onChange={onChange} wide />
-        <Field path="site.instagram" label="Instagram handle" value={getPath(content, 'site.instagram')} onChange={onChange} />
-        <Field path="site.instagramUrl" label="Instagram URL" value={getPath(content, 'site.instagramUrl')} onChange={onChange} />
       </div></div>
       <div className="panel panel--half"><h2>SEO and analytics</h2><div className="form-grid">
         <Field path="site.seo.siteUrl" label="Site URL" value={getPath(content, 'site.seo.siteUrl')} onChange={onChange} />
@@ -629,6 +644,25 @@ function SiteSection({ content, onChange }) {
         <Field path="site.seo.ogImage" label="Default OG image" value={getPath(content, 'site.seo.ogImage')} onChange={onChange} wide />
         <Field path="site.analytics.gaMeasurementId" label="GA Measurement ID" value={getPath(content, 'site.analytics.gaMeasurementId')} onChange={onChange} />
       </div></div>
+      <div className="panel panel--full">
+        <PanelHeader title="Social links" action="Add social link" onAction={onAddSocial} />
+        {socials.length > 0 ? (
+          <div className="social-list">
+            {socials.map((social, index) => (
+              <div className="social-row" key={index}>
+                <div className="form-grid">
+                  <Field path={`site.socials.${index}.label`} label="Network label" value={social.label} placeholder="Instagram" onChange={onChange} />
+                  <Field path={`site.socials.${index}.handle`} label="Display handle" value={social.handle} placeholder="@buristudio" onChange={onChange} />
+                  <Field path={`site.socials.${index}.url`} label="URL" value={social.url} placeholder="https://instagram.com/buristudio" onChange={onChange} wide />
+                </div>
+                <button className="button button--danger" type="button" onClick={() => onRemoveSocial(index)}>Remove social link</button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="notice">No social links configured. The footer will hide this section until a valid label and URL are added.</p>
+        )}
+      </div>
     </section>
   );
 }

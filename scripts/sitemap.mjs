@@ -19,6 +19,14 @@ function imageSrc(image) {
   return typeof image === 'string' ? image : image?.src;
 }
 
+function socialLines(site) {
+  const socials = Array.isArray(site?.socials) ? site.socials : [];
+  return socials
+    .filter((social) => social?.label && social?.url)
+    .map((social) => `- ${social.label}: ${social.handle || social.url}`)
+    .join('\n');
+}
+
 export function staticRoutes(content) {
   return ['/', '/work', '/about', '/contact', ...content.projects.map((p) => `/project/${p.slug}`)];
 }
@@ -50,7 +58,7 @@ export function buildSitemap(content) {
 }
 
 export function buildRobots(content) {
-  return `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl(content)}/sitemap.xml\n`;
+  return `User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /admin/\nDisallow: /404\nDisallow: /404.html\n\nSitemap: ${siteUrl(content)}/sitemap.xml\n`;
 }
 
 export function buildLlms(content) {
@@ -66,6 +74,7 @@ export function buildLlmsFull(content) {
   const { site, homepage, about, contact } = content;
   const base = siteUrl(content);
   const services = (about.services || []).map((s) => `- ${s}`).join('\n');
+  const socials = socialLines(site);
   const projects = content.projects
     .map((p) =>
       [
@@ -102,7 +111,7 @@ export function buildLlmsFull(content) {
     `- Location: ${contact.location}`,
     `- Email: ${contact.email}`,
     `- Phone: ${contact.phone}`,
-    `- Instagram: ${site.instagram}`,
+    socials,
     `- Website: ${base}`,
     ''
   ].join('\n');
