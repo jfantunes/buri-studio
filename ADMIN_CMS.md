@@ -29,4 +29,4 @@ Without these variables, saving still works, but the dashboard will show that de
 6. Netlify detects the commit and starts a new production build.
 7. If deploy monitoring is configured, the dashboard polls Netlify and warns when the deploy fails.
 
-Uploaded images are optimized in the browser as WebP files and committed under `public/images/uploads/`.
+Uploaded images are optimized in the browser as responsive WebP variants and committed under `public/images/uploads/`. The CMS targets `480`, `800`, `1200`, `1600`, `2560`, and `3840` pixel widths for mobile, desktop, 2K, and 4K screens, skipping any size larger than the uploaded source image.

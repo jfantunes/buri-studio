@@ -6,6 +6,8 @@ const ENDPOINTS = {
 };
 
 const DEPLOY_FINAL_STATES = new Set(['ready', 'error']);
+const RESPONSIVE_WIDTHS = [480, 800, 1200, 1600, 2560, 3840];
+const FALLBACK_IMAGE_WIDTH = 1600;
 
 const NAV = [
   ['dashboard', 'Overview'],
@@ -78,19 +80,39 @@ function imageObject(path, label, options = {}) {
   const image = getPath(state.content, path) || {};
   const src = typeof image === 'string' ? image : image.src;
   const alt = typeof image === 'string' ? '' : image.alt || '';
+  const srcset = typeof image === 'string' ? {} : image.srcset || {};
+  const responsiveWidths = getResponsiveWidths(srcset);
   return `
     <article class="image-card">
       <div class="image-card__preview">${src ? `<img src="${escapeHtml(src)}" alt="">` : ''}</div>
       <div class="image-card__body">
         <label class="field"><span>${label} alt text</span><input class="control" data-image-alt="${path}" value="${escapeHtml(alt)}"></label>
-        <label class="field"><span>Image URL</span><input class="control" data-image-src="${path}" value="${escapeHtml(src || '')}" placeholder="/images/uploads/example.webp"></label>
+        <label class="field"><span>Fallback image URL</span><input class="control" data-image-src="${path}" value="${escapeHtml(src || '')}" placeholder="/images/uploads/example-1600.webp"></label>
+        <div class="form-grid">
+          ${responsiveWidths.map((width) => `<label class="field"><span>${width}w URL</span><input class="control" data-image-srcset="${path}" data-image-width="${width}" value="${escapeHtml(srcset[width] || '')}" placeholder="/images/uploads/example-${width}.webp"></label>`).join('')}
+        </div>
         <div class="image-card__actions">
-          <button class="button button--ghost" type="button" data-upload-trigger="${path}">Upload image</button>
+          <button class="button button--ghost" type="button" data-upload-trigger="${path}">Upload responsive image</button>
           ${options.remove ? `<button class="button button--danger" type="button" data-remove-image="${path}">Remove</button>` : ''}
         </div>
         <input class="hidden-input" type="file" accept="image/jpeg,image/png,image/webp" data-upload-input="${path}">
       </div>
     </article>`;
+}
+
+function getResponsiveWidths(srcset = {}) {
+  const existingWidths = Object.keys(srcset).map(Number).filter(Number.isFinite);
+  return [...new Set(RESPONSIVE_WIDTHS.concat(existingWidths))].sort((a, b) => a - b);
+}
+
+function setImageSrcsetValue(image, width, value) {
+  image.srcset ??= {};
+  if (value) {
+    image.srcset[width] = value;
+  } else {
+    delete image.srcset[width];
+    if (Object.keys(image.srcset).length === 0) delete image.srcset;
+  }
 }
 
 function ensureImageObject(path) {
@@ -286,7 +308,7 @@ function renderDashboard() {
         </div>
       </div>
       <div class="panel panel--half"><h2>How saving works</h2><p class="notice">When you save, the dashboard sends JSON and optimized images to a Netlify Function. The function commits everything to GitHub in one commit, then Netlify starts a fresh production build from that commit.</p></div>
-      <div class="panel panel--half"><h2>Image note</h2><p class="notice">New uploads are optimized in your browser as WebP files and stored in <code>public/images/uploads/</code>. Existing responsive image sets remain untouched unless you replace them.</p></div>
+      <div class="panel panel--half"><h2>Image note</h2><p class="notice">New uploads are optimized in your browser as responsive WebP files for mobile, desktop, 2K, and 4K screens, then stored in <code>public/images/uploads/</code>.</p></div>
     </section>`;
 }
 
@@ -491,25 +513,53 @@ async function save() {
   }
 }
 
-async function optimizeImage(file) {
-  if (!file.type.startsWith('image/')) throw new Error('Please choose an image file.');
-  const bitmap = await createImageBitmap(file);
-  const maxWidth = 1800;
-  const scale = Math.min(1, maxWidth / bitmap.width);
+function imageVariantWidths(sourceWidth) {
+  const widths = RESPONSIVE_WIDTHS.filter((width) => width <= sourceWidth);
+  if (!widths.includes(sourceWidth) && sourceWidth < RESPONSIVE_WIDTHS.at(-1)) widths.push(sourceWidth);
+  return [...new Set(widths.length ? widths : [sourceWidth])].sort((a, b) => a - b);
+}
+
+function fallbackImageUrl(variants) {
+  return variants.find((variant) => variant.width === FALLBACK_IMAGE_WIDTH)?.publicUrl || variants.at(-1)?.publicUrl || '';
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).replace(/^data:image\/webp;base64,/, ''));
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function createImageVariant(bitmap, width, baseName) {
+  const scale = Math.min(1, width / bitmap.width);
   const canvas = document.createElement('canvas');
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
   canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/webp', 0.86));
-  const dataUrl = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-  const base64 = dataUrl.replace(/^data:image\/webp;base64,/, '');
-  const filename = `${Date.now()}-${slugify(file.name.replace(/\.[^.]+$/, ''))}.webp`;
-  return { path: `public/images/uploads/${filename}`, publicUrl: `/images/uploads/${filename}`, contentBase64: base64 };
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/webp', 0.84));
+  if (!blob) throw new Error('Could not optimize this image.');
+  const filename = `${baseName}-${canvas.width}.webp`;
+  return {
+    width: canvas.width,
+    path: `public/images/uploads/${filename}`,
+    publicUrl: `/images/uploads/${filename}`,
+    contentBase64: await blobToBase64(blob)
+  };
+}
+
+async function optimizeImage(file) {
+  if (!file.type.startsWith('image/')) throw new Error('Please choose an image file.');
+  const bitmap = await createImageBitmap(file);
+  const baseName = `${Date.now()}-${slugify(file.name.replace(/\.[^.]+$/, ''))}`;
+  const variants = await Promise.all(imageVariantWidths(bitmap.width).map((width) => createImageVariant(bitmap, width, baseName)));
+  bitmap.close?.();
+  return {
+    uploads: variants.map(({ path, contentBase64 }) => ({ path, contentBase64 })),
+    publicUrl: fallbackImageUrl(variants),
+    srcset: Object.fromEntries(variants.map((variant) => [String(variant.width), variant.publicUrl]))
+  };
 }
 
 app.addEventListener('submit', async (event) => {
@@ -549,7 +599,12 @@ app.addEventListener('input', (event) => {
   if (target.dataset.imageSrc) {
     const image = ensureImageObject(target.dataset.imageSrc);
     image.src = target.value;
-    delete image.srcset;
+    state.dirty = true;
+    reflectDirtyState();
+  }
+  if (target.dataset.imageSrcset) {
+    const image = ensureImageObject(target.dataset.imageSrcset);
+    setImageSrcsetValue(image, target.dataset.imageWidth, target.value);
     state.dirty = true;
     reflectDirtyState();
   }
@@ -572,8 +627,9 @@ app.addEventListener('change', async (event) => {
     const upload = await optimizeImage(target.files[0]);
     const image = ensureImageObject(target.dataset.uploadInput);
     image.src = upload.publicUrl;
-    delete image.srcset;
-    state.uploads = state.uploads.filter((item) => item.path !== upload.path).concat(upload);
+    image.srcset = upload.srcset;
+    const uploadPaths = new Set(upload.uploads.map((item) => item.path));
+    state.uploads = state.uploads.filter((item) => !uploadPaths.has(item.path)).concat(upload.uploads);
     markDirty();
   } catch (error) {
     showToast(error.message, 'error');
