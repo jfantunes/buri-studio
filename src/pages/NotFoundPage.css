@@ -1,0 +1,13 @@
+.not-found {
+  padding: var(--section-top) var(--page-pad) var(--section-bottom);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.not-found p {
+  font-size: 18px;
+}
+
+.not-found a {
+  color: var(--color-accent);
+}

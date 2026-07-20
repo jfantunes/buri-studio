@@ -1,0 +1,47 @@
+{
+  "seo": {
+    "description": "Buri Studio designs gardens, parks and outdoor spaces, and produces the photorealistic 3D renders that let clients see them before a single stone is placed."
+  },
+  "intro": "We design gardens, parks, and outdoor spaces, and produce the photorealistic renders that let clients see them before a single stone is placed.",
+  "hero": {
+    "intervalMs": 5000,
+    "slides": [
+      {
+        "alt": "Landscape photograph — hero 1",
+        "src": "/images/hero/hero-1-800.svg",
+        "srcset": {
+          "480": "/images/hero/hero-1-480.svg",
+          "800": "/images/hero/hero-1-800.svg",
+          "1600": "/images/hero/hero-1-1600.svg"
+        }
+      },
+      {
+        "alt": "Landscape photograph — hero 2",
+        "src": "/images/hero/hero-2-800.svg",
+        "srcset": {
+          "480": "/images/hero/hero-2-480.svg",
+          "800": "/images/hero/hero-2-800.svg",
+          "1600": "/images/hero/hero-2-1600.svg"
+        }
+      },
+      {
+        "alt": "Landscape photograph — hero 3",
+        "src": "/images/hero/hero-3-800.svg",
+        "srcset": {
+          "480": "/images/hero/hero-3-480.svg",
+          "800": "/images/hero/hero-3-800.svg",
+          "1600": "/images/hero/hero-3-1600.svg"
+        }
+      },
+      {
+        "alt": "Landscape photograph — hero 4",
+        "src": "/images/hero/hero-4-800.svg",
+        "srcset": {
+          "480": "/images/hero/hero-4-480.svg",
+          "800": "/images/hero/hero-4-800.svg",
+          "1600": "/images/hero/hero-4-1600.svg"
+        }
+      }
+    ]
+  }
+}

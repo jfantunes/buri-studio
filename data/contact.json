@@ -1,0 +1,16 @@
+{
+  "seo": {
+    "title": "Contact",
+    "description": "Get in touch with Buri Studio about landscape architecture and 3D visualization projects."
+  },
+  "heading": "Contact",
+  "email": "studio@buristudio.com",
+  "phone": "+1 (512) 555-0148",
+  "location": "Austin, Texas",
+  "form": {
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Project details",
+    "submitLabel": "Send"
+  }
+}

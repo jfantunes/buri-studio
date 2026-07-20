@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360">
+  <rect width="480" height="360" fill="#e2ddce"/>
+  <defs>
+    <pattern id="p" width="36" height="36" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="18" height="36" fill="rgba(0,0,0,0.045)"/>
+    </pattern>
+  </defs>
+  <rect width="480" height="360" fill="url(#p)"/>
+  <text x="240" y="180" font-family="monospace" font-size="12" fill="rgba(0,0,0,0.38)" text-anchor="middle" dominant-baseline="middle">COVER 480 · 480×360</text>
+</svg>

@@ -1,0 +1,17 @@
+{
+  "name": "Buri Studio",
+  "tagline": "Landscape Architecture & Visualization",
+  "logo": "/images/logo.svg",
+  "instagram": "@buristudio",
+  "instagramUrl": "https://instagram.com/buristudio",
+  "seo": {
+    "siteUrl": "https://www.buristudio.com",
+    "titleTemplate": "%s — Buri Studio",
+    "defaultTitle": "Buri Studio — Landscape Architecture & 3D Visualization",
+    "defaultDescription": "Buri Studio is a landscape architecture and 3D visualization practice designing gardens, parks and outdoor spaces, and producing photorealistic renders before a single stone is placed.",
+    "ogImage": "/images/og-default.svg"
+  },
+  "analytics": {
+    "gaMeasurementId": ""
+  }
+}

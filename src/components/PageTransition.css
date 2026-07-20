@@ -1,0 +1,32 @@
+/* The full-screen "shade" that closes over the old page and lifts away over
+   the new one. Timing/easing are CSS variables so you can retune the feel
+   here without touching the transition logic. */
+.page-shade {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--color-ink);
+  transform: translateY(-102%);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.page-shade.is-covering,
+.page-shade.is-revealing {
+  transition: transform var(--shade-duration) var(--shade-ease);
+  pointer-events: auto;
+}
+
+.page-shade.is-covering {
+  transform: translateY(0);
+}
+
+.page-shade.is-revealing {
+  transform: translateY(-102%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-shade {
+    display: none;
+  }
+}
