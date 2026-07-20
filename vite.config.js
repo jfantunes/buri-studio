@@ -39,8 +39,10 @@ function contentSeoPlugin() {
         return send(res, route.build(loadContent(root)), route.type);
       });
     },
-    transformIndexHtml() {
+    transformIndexHtml(_html, context) {
       if (isSsrBuild) return [];
+      if (context?.filename && path.resolve(context.filename) !== path.join(root, 'index.html')) return [];
+      if (!context?.filename && context?.path && context.path !== '/') return [];
       const json = JSON.stringify(loadContent(root)).replace(/</g, '\\u003c');
       return [
         {
@@ -69,6 +71,14 @@ function contentSeoPlugin() {
 
 export default defineConfig({
   plugins: [react(), contentSeoPlugin()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(process.cwd(), 'index.html'),
+        admin: path.resolve(process.cwd(), 'admin/index.html')
+      }
+    }
+  },
   ssr: {
     // These packages are CommonJS-only; bundle them into the SSR build so
     // Node's ESM loader can consume them during prerendering.

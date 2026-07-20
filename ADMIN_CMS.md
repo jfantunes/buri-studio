@@ -1,6 +1,6 @@
 # Admin CMS Setup
 
-The private dashboard lives at `/admin/`. It is a static admin interface backed by Netlify Functions, so the GitHub write token stays in Netlify environment variables and is never stored in the repository.
+The private dashboard lives at `/admin/`. It is a separate React app in the same Vite build, backed by Netlify Functions, so the GitHub write token stays in Netlify environment variables and is never stored in the repository.
 
 ## Required Netlify Environment Variables
 
