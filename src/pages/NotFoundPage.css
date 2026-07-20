@@ -1,13 +1,113 @@
+/* Kinetic giant-type 404. The entrance animation lives on .not-found__digit
+   (outer span) while useKineticType transforms .not-found__digit-inner, so
+   the two never animate the same property on the same element. */
 .not-found {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: var(--section-top) var(--page-pad) var(--section-bottom);
-  max-width: 640px;
-  margin: 0 auto;
+  overflow: hidden;
 }
 
-.not-found p {
-  font-size: 18px;
+.not-found__label {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin: 0 0 24px;
 }
 
-.not-found a {
+.not-found__title {
+  display: flex;
+  margin: 0;
+  font-size: clamp(140px, 26vw, 360px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  user-select: none;
+}
+
+.not-found__digit {
+  display: inline-block;
+  animation: not-found-rise 900ms var(--shade-ease) both;
+  animation-delay: calc(120ms + var(--i) * 90ms);
+}
+
+.not-found__digit-inner {
+  display: inline-block;
+  will-change: transform;
+  transition: color 0.3s ease;
+}
+
+.not-found__digit-inner:hover {
   color: var(--color-accent);
+}
+
+.not-found__text {
+  font-size: 18px;
+  color: var(--color-text);
+  margin: 40px 0 0;
+}
+
+.not-found__back {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-soft);
+  text-decoration: none;
+}
+
+.not-found__back:hover {
+  color: var(--color-ink);
+}
+
+/* Label lands first, digits stagger via --i, copy and link follow. */
+.not-found__label,
+.not-found__text,
+.not-found__back {
+  animation: not-found-rise 900ms var(--shade-ease) both;
+}
+
+.not-found__text,
+.not-found__back {
+  animation-delay: 480ms;
+}
+
+@keyframes not-found-rise {
+  from {
+    opacity: 0;
+    transform: translateY(56px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found__label,
+  .not-found__digit,
+  .not-found__text,
+  .not-found__back {
+    animation: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .not-found__title {
+    font-size: clamp(96px, 30vw, 200px);
+  }
+
+  .not-found__text {
+    font-size: 16px;
+    margin-top: 32px;
+  }
 }
