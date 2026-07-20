@@ -4,11 +4,26 @@
   command = "npm run build"
   publish = "dist"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [build.environment]
   NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
 
 # Vite emits content-hashed files under /assets — safe to cache forever.
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cache-Control = "no-store"
+    X-Robots-Tag = "noindex, nofollow"
