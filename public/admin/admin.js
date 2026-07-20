@@ -1,8 +1,11 @@
 const ENDPOINTS = {
   login: '/.netlify/functions/admin-login',
   content: '/.netlify/functions/cms-content',
-  update: '/.netlify/functions/cms-update'
+  update: '/.netlify/functions/cms-update',
+  deploy: '/.netlify/functions/cms-deploy-status'
 };
+
+const DEPLOY_FINAL_STATES = new Set(['ready', 'error']);
 
 const NAV = [
   ['dashboard', 'Overview'],
@@ -23,6 +26,8 @@ const state = {
   dirty: false,
   loading: true,
   saving: false,
+  deploy: null,
+  deployPollTimer: null,
   toast: null
 };
 
@@ -106,6 +111,29 @@ function reflectDirtyState() {
   const saveButton = document.querySelector('[data-action="save"]');
   if (status) status.textContent = state.dirty ? 'Unsaved edits' : 'Synced with GitHub';
   if (saveButton) saveButton.disabled = state.saving;
+}
+
+function deployLabel(stateName) {
+  return {
+    waiting: 'Waiting for Netlify',
+    unconfigured: 'Deploy monitoring off',
+    ready: 'Published',
+    error: 'Deploy failed',
+    building: 'Building',
+    processing: 'Processing',
+    enqueued: 'Queued',
+    new: 'Queued',
+    uploading: 'Uploading'
+  }[stateName] || 'Checking deploy';
+}
+
+function deployMessage(deploy) {
+  if (!deploy) return '';
+  if (deploy.state === 'ready') return 'The latest CMS save is live in production.';
+  if (deploy.state === 'error') return deploy.errorMessage || 'Content was saved, but the production deploy failed.';
+  if (deploy.state === 'unconfigured') return 'Content was saved, but Netlify deploy monitoring is not configured yet.';
+  if (deploy.state === 'waiting') return 'Content was saved to GitHub. Waiting for Netlify to start the deploy.';
+  return 'Netlify is building the saved content now.';
 }
 
 async function api(endpoint, options = {}) {
@@ -193,9 +221,29 @@ function renderAdmin() {
             <button class="button button--accent" type="button" data-action="save" ${state.saving ? 'disabled' : ''}>${state.saving ? 'Saving...' : 'Save & deploy'}</button>
           </div>
         </div>
+        ${renderDeployStatus()}
         ${renderSection()}
       </main>
     </div>`;
+}
+
+function renderDeployStatus() {
+  const deploy = state.deploy;
+  if (!deploy) return '';
+  const isError = deploy.state === 'error';
+  const isReady = deploy.state === 'ready';
+  const className = `deploy-card ${isError ? 'deploy-card--error' : ''} ${isReady ? 'deploy-card--ready' : ''}`;
+  return `
+    <section class="${className}" aria-live="polite">
+      <div>
+        <span class="deploy-card__label">${deployLabel(deploy.state)}</span>
+        <p>${escapeHtml(deployMessage(deploy))}</p>
+      </div>
+      <div class="deploy-card__meta">
+        ${deploy.commitSha ? `<code>${escapeHtml(deploy.commitSha.slice(0, 7))}</code>` : ''}
+        ${deploy.adminUrl ? `<a href="${escapeHtml(deploy.adminUrl)}" target="_blank" rel="noreferrer">Open deploy</a>` : ''}
+      </div>
+    </section>`;
 }
 
 function renderSectionTitle() {
@@ -378,6 +426,42 @@ function showToast(message, type = 'success') {
   render();
 }
 
+async function pollDeploy(commitSha, attempt = 0) {
+  clearTimeout(state.deployPollTimer);
+
+  try {
+    const result = await api(`${ENDPOINTS.deploy}?commit=${encodeURIComponent(commitSha)}`);
+    if (!result.configured) {
+      state.deploy = { state: 'unconfigured', commitSha };
+      render();
+      return;
+    }
+
+    if (result.deploy) {
+      state.deploy = { ...result.deploy, commitSha };
+      render();
+      if (DEPLOY_FINAL_STATES.has(result.deploy.state)) return;
+    } else {
+      state.deploy = { state: 'waiting', commitSha };
+      render();
+    }
+  } catch (error) {
+    state.deploy = { state: 'error', commitSha, errorMessage: error.message };
+    render();
+    return;
+  }
+
+  if (attempt < 30) {
+    state.deployPollTimer = setTimeout(() => pollDeploy(commitSha, attempt + 1), 5000);
+  }
+}
+
+function startDeployPolling(commitSha) {
+  state.deploy = { state: 'waiting', commitSha };
+  render();
+  pollDeploy(commitSha);
+}
+
 async function save() {
   state.saving = true;
   render();
@@ -398,6 +482,7 @@ async function save() {
     state.uploads = [];
     state.dirty = false;
     showToast(`Saved. Commit ${result.commit.sha.slice(0, 7)} is deploying.`);
+    startDeployPolling(result.commit.sha);
   } catch (error) {
     showToast(error.message, 'error');
   } finally {

@@ -10,18 +10,18 @@ const JSON_PATHS = [
 const JSON_PATH_SET = new Set(JSON_PATHS);
 const MAX_JSON_BYTES = 600 * 1024;
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+const GITHUB_OWNER = 'jfantunes';
+const GITHUB_REPO = 'buri-studio';
+const GITHUB_BRANCH = 'main';
 
 function githubConfig() {
-  const owner = process.env.GITHUB_OWNER;
-  const repo = process.env.GITHUB_REPO;
   const token = process.env.GITHUB_TOKEN;
-  const branch = process.env.GITHUB_BRANCH || 'main';
 
-  if (!owner || !repo || !token) {
-    throw new Error('GITHUB_OWNER, GITHUB_REPO, and GITHUB_TOKEN are required');
+  if (!token) {
+    throw new Error('GITHUB_TOKEN is required');
   }
 
-  return { owner, repo, token, branch };
+  return { owner: GITHUB_OWNER, repo: GITHUB_REPO, token, branch: GITHUB_BRANCH };
 }
 
 async function githubFetch(path, options = {}) {
