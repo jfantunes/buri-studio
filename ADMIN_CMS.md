@@ -8,7 +8,7 @@ The private dashboard lives at `/admin/`. It is a static admin interface backed 
 - `ADMIN_SESSION_SECRET`: random long secret used to sign the admin session cookie.
 - `GITHUB_TOKEN`: fine-grained GitHub token with contents read/write access to this repository.
 
-The repository target is public information and is hardcoded in `netlify/functions/_github.js` as `jfantunes/buri-studio` on `main`. Do not add `GITHUB_REPO` or `GITHUB_BRANCH` as Netlify environment variables; Netlify may treat those public values as exposed secrets during deploy scanning.
+The repository target is public information and is hardcoded in `netlify/functions/_github.js` as `jfantunes/buri-studio` on `main`. Do not add `GITHUB_OWNER`, `GITHUB_REPO`, or `GITHUB_BRANCH` as Netlify environment variables; Netlify may treat those public values as exposed secrets during deploy scanning.
 
 ## Optional Deploy Monitoring
 
