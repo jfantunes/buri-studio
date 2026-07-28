@@ -9,3 +9,8 @@ export function useContent() {
   const { language } = useContext(LanguageContext);
   return useMemo(() => localizeValue(content, language), [content, language]);
 }
+
+/** Access the original untranslated content for stable media references. */
+export function useRawContent() {
+  return useContext(ContentContext);
+}

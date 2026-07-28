@@ -1,24 +1,47 @@
 import { useEffect, useRef, useState } from 'react';
 import Seo from '../components/Seo.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
-import { useContent } from '../hooks/useContent.js';
+import { useContent, useRawContent } from '../hooks/useContent.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './WorkPage.css';
 
 const FILTER_FADE_MS = 240;
+const ALL_FILTER = 'all';
+
+function rawTitle(project) {
+  const title = project?.title;
+  if (!title || typeof title !== 'object') return title || '';
+  return title.en || title.pt || '';
+}
 
 export default function WorkPage() {
   const { work, projects } = useContent();
+  const rawContent = useRawContent();
   const { t } = useLanguage();
   const allLabel = t('work.all');
-  const [filter, setFilter] = useState(allLabel);
-  const [visibleFilter, setVisibleFilter] = useState(allLabel);
+  const [filter, setFilter] = useState(ALL_FILTER);
+  const [visibleFilter, setVisibleFilter] = useState(ALL_FILTER);
   const [isFading, setIsFading] = useState(false);
   const fadeTimeoutRef = useRef(null);
 
-  const categories = [...new Set(projects.map((p) => p.category))];
-  const tabs = [allLabel, ...categories];
-  const visible = visibleFilter === allLabel ? projects : projects.filter((p) => p.category === visibleFilter);
+  const rawProjects = rawContent?.projects ?? [];
+  const categories = [...new Set(rawProjects.map((p) => p.category?.en || p.category).filter(Boolean))];
+  const tabs = [
+    { key: ALL_FILTER, label: allLabel },
+    ...categories.map((category) => {
+      const project = projects.find((item) => {
+        const rawProject = rawProjects.find((raw) => raw.slug === item.slug);
+        return (rawProject?.category?.en || rawProject?.category) === category;
+      });
+      return { key: category, label: project?.category || category };
+    })
+  ];
+  const visible = visibleFilter === ALL_FILTER
+    ? projects
+    : projects.filter((project) => {
+        const rawProject = rawProjects.find((item) => item.slug === project.slug);
+        return (rawProject?.category?.en || rawProject?.category) === visibleFilter;
+      });
 
   useEffect(() => {
     return () => {
@@ -26,19 +49,13 @@ export default function WorkPage() {
     };
   }, []);
 
-  useEffect(() => {
-    setFilter(allLabel);
-    setVisibleFilter(allLabel);
-    setIsFading(false);
-  }, [allLabel]);
-
-  function handleFilterChange(tab) {
-    if (tab === filter) return;
+  function handleFilterChange(nextFilter) {
+    if (nextFilter === filter) return;
 
     clearTimeout(fadeTimeoutRef.current);
-    setFilter(tab);
+    setFilter(nextFilter);
 
-    if (tab === visibleFilter) {
+    if (nextFilter === visibleFilter) {
       setIsFading(false);
       return;
     }
@@ -47,14 +64,14 @@ export default function WorkPage() {
       typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (shouldReduceMotion) {
-      setVisibleFilter(tab);
+      setVisibleFilter(nextFilter);
       setIsFading(false);
       return;
     }
 
     setIsFading(true);
     fadeTimeoutRef.current = setTimeout(() => {
-      setVisibleFilter(tab);
+      setVisibleFilter(nextFilter);
       setIsFading(false);
     }, FILTER_FADE_MS);
   }
@@ -67,21 +84,29 @@ export default function WorkPage() {
         <div className="work__tabs" role="tablist" aria-label={t('work.filtersLabel')}>
           {tabs.map((tab) => (
             <button
-              key={tab}
+              key={tab.key}
               type="button"
               role="tab"
-              aria-selected={filter === tab}
-              className={`work__tab${filter === tab ? ' is-active' : ''}`}
-              onClick={() => handleFilterChange(tab)}
+              aria-selected={filter === tab.key}
+              className={`work__tab${filter === tab.key ? ' is-active' : ''}`}
+              onClick={() => handleFilterChange(tab.key)}
             >
-              {tab}
+              {tab.label}
             </button>
           ))}
         </div>
         <div className={`work__grid${isFading ? ' is-fading' : ''}`}>
-          {visible.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
+          {visible.map((project) => {
+            const rawProject = rawContent?.projects?.find((item) => item.slug === project.slug);
+            return (
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                coverImage={rawProject?.images?.[0]}
+                altFallback={rawTitle(rawProject) || project.slug}
+              />
+            );
+          })}
         </div>
       </section>
     </>

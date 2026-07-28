@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
 import ImageSlider from '../components/ImageSlider.jsx';
-import { useContent } from '../hooks/useContent.js';
+import { useContent, useRawContent } from '../hooks/useContent.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './ProjectPage.css';
 
@@ -10,9 +10,16 @@ function coverSrc(project) {
   return typeof cover === 'string' ? cover : cover?.src;
 }
 
+function rawTitle(project) {
+  const title = project?.title;
+  if (!title || typeof title !== 'object') return title || '';
+  return title.en || title.pt || '';
+}
+
 export default function ProjectPage() {
   const { slug } = useParams();
   const { site, projects } = useContent();
+  const rawContent = useRawContent();
   const { t } = useLanguage();
   const index = projects.findIndex((p) => p.slug === slug);
 
@@ -30,6 +37,7 @@ export default function ProjectPage() {
   }
 
   const project = projects[index];
+  const rawProject = rawContent?.projects?.find((p) => p.slug === project.slug);
   const total = projects.length;
   const prev = projects[(index - 1 + total) % total];
   const next = projects[(index + 1) % total];
@@ -69,7 +77,7 @@ export default function ProjectPage() {
             </div>
           </div>
         </div>
-        <ImageSlider key={project.slug} images={project.images ?? []} title={project.title} />
+        <ImageSlider key={project.slug} images={rawProject?.images ?? []} altFallback={rawTitle(rawProject) || project.slug} />
         <p className="project__description">{project.description}</p>
         <nav className="project__pager" aria-label={t('project.pagerLabel')}>
           <Link to={`/project/${prev.slug}`} className="project__pager-link">
