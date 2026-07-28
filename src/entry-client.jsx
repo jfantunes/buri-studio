@@ -7,17 +7,20 @@ import './styles/variables.css';
 import './styles/global.css';
 import App from './App.jsx';
 import { ContentProvider } from './context/ContentContext.jsx';
+import { LanguageProvider } from './context/LanguageContext.jsx';
 
 const rootEl = document.getElementById('root');
 
 const app = (
   <React.StrictMode>
     <HelmetProvider>
-      <ContentProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ContentProvider>
+      <LanguageProvider>
+        <ContentProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ContentProvider>
+      </LanguageProvider>
     </HelmetProvider>
   </React.StrictMode>
 );

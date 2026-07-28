@@ -1,3 +1,5 @@
+import { localizeValue } from '../src/utils/language.js';
+
 /**
  * Generators for the SEO files emitted at build time and served live in dev:
  * sitemap.xml, robots.txt, llms.txt and llms-full.txt.
@@ -32,11 +34,12 @@ export function staticRoutes(content) {
 }
 
 export function buildSitemap(content) {
-  const base = siteUrl(content);
+  const localized = localizeValue(content, 'en');
+  const base = siteUrl(localized);
   const today = new Date().toISOString().slice(0, 10);
-  const urls = staticRoutes(content)
+  const urls = staticRoutes(localized)
     .map((route) => {
-      const project = content.projects.find((p) => `/project/${p.slug}` === route);
+      const project = localized.projects.find((p) => `/project/${p.slug}` === route);
       const cover = project ? imageSrc(project.images?.[0]) : null;
       const priority = route === '/' ? '1.0' : route === '/work' ? '0.9' : '0.7';
       return [
@@ -58,24 +61,26 @@ export function buildSitemap(content) {
 }
 
 export function buildRobots(content) {
-  return `User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /admin/\nDisallow: /404\nDisallow: /404.html\n\nSitemap: ${siteUrl(content)}/sitemap.xml\n`;
+  return `User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /admin/\nDisallow: /404\nDisallow: /404.html\n\nSitemap: ${siteUrl(localizeValue(content, 'en'))}/sitemap.xml\n`;
 }
 
 export function buildLlms(content) {
-  const { site, homepage } = content;
-  const base = siteUrl(content);
-  const projects = content.projects
+  const localized = localizeValue(content, 'en');
+  const { site, homepage } = localized;
+  const base = siteUrl(localized);
+  const projects = localized.projects
     .map((p) => `- [${p.title}](${base}/project/${p.slug}): ${p.category} — ${p.location}, ${p.year}`)
     .join('\n');
   return `# ${site.name}\n\n> ${site.tagline}. ${homepage.intro || ''}\n\n## Work\n\n${projects}\n\n## Studio\n\n- [About](${base}/about)\n- [Contact](${base}/contact)\n- [Full content](${base}/llms-full.txt)\n`;
 }
 
 export function buildLlmsFull(content) {
-  const { site, homepage, about, contact } = content;
-  const base = siteUrl(content);
+  const localized = localizeValue(content, 'en');
+  const { site, homepage, about, contact } = localized;
+  const base = siteUrl(localized);
   const services = (about.services || []).map((s) => `- ${s}`).join('\n');
   const socials = socialLines(site);
-  const projects = content.projects
+  const projects = localized.projects
     .map((p) =>
       [
         `### ${p.title}`,

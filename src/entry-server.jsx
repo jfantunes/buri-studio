@@ -4,6 +4,7 @@ import { StaticRouter } from 'react-router-dom/server';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App.jsx';
 import { ContentProvider } from './context/ContentContext.jsx';
+import { LanguageProvider } from './context/LanguageContext.jsx';
 
 // Used by scripts/prerender.mjs to render each route to static HTML.
 export function render(url, content) {
@@ -11,11 +12,13 @@ export function render(url, content) {
   const html = renderToString(
     <React.StrictMode>
       <HelmetProvider context={helmetContext}>
-        <ContentProvider value={content}>
-          <StaticRouter location={url}>
-            <App />
-          </StaticRouter>
-        </ContentProvider>
+        <LanguageProvider initialLanguage="en">
+          <ContentProvider value={content}>
+            <StaticRouter location={url}>
+              <App />
+            </StaticRouter>
+          </ContentProvider>
+        </LanguageProvider>
       </HelmetProvider>
     </React.StrictMode>
   );

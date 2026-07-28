@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
 import ImageSlider from '../components/ImageSlider.jsx';
 import { useContent } from '../hooks/useContent.js';
+import { useLanguage } from '../context/LanguageContext.jsx';
 import './ProjectPage.css';
 
 function coverSrc(project) {
@@ -12,15 +13,16 @@ function coverSrc(project) {
 export default function ProjectPage() {
   const { slug } = useParams();
   const { site, projects } = useContent();
+  const { t } = useLanguage();
   const index = projects.findIndex((p) => p.slug === slug);
 
   if (index === -1) {
     return (
       <>
-        <Seo title="Project not found" path={`/project/${slug}`} />
+        <Seo title={t('project.notFoundTitle')} path={`/project/${slug}`} />
         <section className="project">
           <p className="project__missing">
-            Project not found. <Link to="/work">Back to work</Link>
+            {t('project.notFoundText')} <Link to="/work">{t('project.backToWork')}</Link>
           </p>
         </section>
       </>
@@ -56,7 +58,7 @@ export default function ProjectPage() {
       />
       <section className="project">
         <Link to="/work" className="project__back">
-          ← Work
+          ← {t('project.workBack')}
         </Link>
         <div className="project__header">
           <h1 className="project__title">{project.title}</h1>
@@ -69,13 +71,13 @@ export default function ProjectPage() {
         </div>
         <ImageSlider key={project.slug} images={project.images ?? []} title={project.title} />
         <p className="project__description">{project.description}</p>
-        <nav className="project__pager" aria-label="More projects">
+        <nav className="project__pager" aria-label={t('project.pagerLabel')}>
           <Link to={`/project/${prev.slug}`} className="project__pager-link">
-            <span className="project__pager-label">← Previous</span>
+            <span className="project__pager-label">← {t('project.previous')}</span>
             <span className="project__pager-title">{prev.title}</span>
           </Link>
           <Link to={`/project/${next.slug}`} className="project__pager-link project__pager-link--next">
-            <span className="project__pager-label">Next →</span>
+            <span className="project__pager-label">{t('project.next')} →</span>
             <span className="project__pager-title">{next.title}</span>
           </Link>
         </nav>

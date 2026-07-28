@@ -1,19 +1,40 @@
 {
   "seo": {
-    "title": "Projects",
-    "description": "Landscape architecture and 3D visualization projects by Buri Studio."
+    "title": {
+      "en": "Projects",
+      "pt": "Projetos"
+    },
+    "description": {
+      "en": "Landscape architecture and 3D visualization projects by Buri Studio.",
+      "pt": "Projetos de arquitetura paisagista e visualização 3D da Buri Studio."
+    }
   },
   "projects": [
     {
       "slug": "meridian-courtyard",
-      "title": "Meridian Courtyard",
-      "location": "Austin, TX",
+      "title": {
+        "en": "Meridian Courtyard",
+        "pt": "Meridian Courtyard"
+      },
+      "location": {
+        "en": "Austin, TX",
+        "pt": "Austin, TX"
+      },
       "year": "2024",
-      "category": "Landscape Design",
-      "description": "A private courtyard reworked around a single existing live oak. Decomposed granite paths and low limestone walls step down the slope, with native grasses replacing what was lawn.",
+      "category": {
+        "en": "Landscape Design",
+        "pt": "Desenho Paisagista"
+      },
+      "description": {
+        "en": "A private courtyard reworked around a single existing live oak. Decomposed granite paths and low limestone walls step down the slope, with native grasses replacing what was lawn.",
+        "pt": "Um pátio privado reorganizado em torno de um carvalho vivo existente. Caminhos em granito decomposto e muros baixos de calcário descem a encosta, com gramíneas nativas a substituir o antigo relvado."
+      },
       "images": [
         {
-          "alt": "Meridian Courtyard — cover",
+          "alt": {
+            "en": "Meridian Courtyard — cover",
+            "pt": "Meridian Courtyard — imagem principal"
+          },
           "src": "/images/projects/meridian-courtyard/cover-800.jpg",
           "srcset": {
             "480": "/images/projects/meridian-courtyard/cover-480.jpg",
@@ -22,7 +43,10 @@
           }
         },
         {
-          "alt": "Meridian Courtyard — detail 1",
+          "alt": {
+            "en": "Meridian Courtyard — detail 1",
+            "pt": "Meridian Courtyard — detalhe 1"
+          },
           "src": "/images/projects/meridian-courtyard/detail-1-800.jpg",
           "srcset": {
             "480": "/images/projects/meridian-courtyard/detail-1-480.jpg",
@@ -31,7 +55,10 @@
           }
         },
         {
-          "alt": "Meridian Courtyard — detail 2",
+          "alt": {
+            "en": "Meridian Courtyard — detail 2",
+            "pt": "Meridian Courtyard — detalhe 2"
+          },
           "src": "/images/projects/meridian-courtyard/detail-2-800.jpg",
           "srcset": {
             "480": "/images/projects/meridian-courtyard/detail-2-480.jpg",
@@ -43,14 +70,29 @@
     },
     {
       "slug": "two-rivers-park",
-      "title": "Two Rivers Park",
-      "location": "Portland, OR",
+      "title": {
+        "en": "Two Rivers Park",
+        "pt": "Two Rivers Park"
+      },
+      "location": {
+        "en": "Portland, OR",
+        "pt": "Portland, OR"
+      },
       "year": "2023",
-      "category": "Landscape Design",
-      "description": "A four-acre public park at the confluence of two waterways. Terraced wetland plantings manage stormwater while a raised boardwalk keeps the floodplain accessible year-round.",
+      "category": {
+        "en": "Landscape Design",
+        "pt": "Desenho Paisagista"
+      },
+      "description": {
+        "en": "A four-acre public park at the confluence of two waterways. Terraced wetland plantings manage stormwater while a raised boardwalk keeps the floodplain accessible year-round.",
+        "pt": "Um parque público de quatro acres na confluência de dois cursos de água. Plantações de zonas húmidas em socalcos gerem as águas pluviais, enquanto um passadiço elevado mantém a planície aluvial acessível durante todo o ano."
+      },
       "images": [
         {
-          "alt": "Two Rivers Park — cover",
+          "alt": {
+            "en": "Two Rivers Park — cover",
+            "pt": "Two Rivers Park — imagem principal"
+          },
           "src": "/images/projects/two-rivers-park/cover-800.jpg",
           "srcset": {
             "480": "/images/projects/two-rivers-park/cover-480.jpg",
@@ -59,7 +101,10 @@
           }
         },
         {
-          "alt": "Two Rivers Park — detail 1",
+          "alt": {
+            "en": "Two Rivers Park — detail 1",
+            "pt": "Two Rivers Park — detalhe 1"
+          },
           "src": "/images/projects/two-rivers-park/detail-1-800.jpg",
           "srcset": {
             "480": "/images/projects/two-rivers-park/detail-1-480.jpg",
@@ -68,7 +113,10 @@
           }
         },
         {
-          "alt": "Two Rivers Park — detail 2",
+          "alt": {
+            "en": "Two Rivers Park — detail 2",
+            "pt": "Two Rivers Park — detalhe 2"
+          },
           "src": "/images/projects/two-rivers-park/detail-2-800.jpg",
           "srcset": {
             "480": "/images/projects/two-rivers-park/detail-2-480.jpg",
@@ -77,7 +125,10 @@
           }
         },
         {
-          "alt": "Two Rivers Park — detail 3",
+          "alt": {
+            "en": "Two Rivers Park — detail 3",
+            "pt": "Two Rivers Park — detalhe 3"
+          },
           "src": "/images/projects/two-rivers-park/detail-3-800.jpg",
           "srcset": {
             "480": "/images/projects/two-rivers-park/detail-3-480.jpg",
@@ -89,14 +140,29 @@
     },
     {
       "slug": "sable-ridge-garden",
-      "title": "Sable Ridge Garden",
-      "location": "Sonoma, CA",
+      "title": {
+        "en": "Sable Ridge Garden",
+        "pt": "Sable Ridge Garden"
+      },
+      "location": {
+        "en": "Sonoma, CA",
+        "pt": "Sonoma, CA"
+      },
       "year": "2023",
-      "category": "Landscape Design",
-      "description": "A dry garden on a steep hillside site, planted almost entirely with drought-tolerant natives. Stone terracing controls erosion and creates a sequence of small outdoor rooms.",
+      "category": {
+        "en": "Landscape Design",
+        "pt": "Desenho Paisagista"
+      },
+      "description": {
+        "en": "A dry garden on a steep hillside site, planted almost entirely with drought-tolerant natives. Stone terracing controls erosion and creates a sequence of small outdoor rooms.",
+        "pt": "Um jardim seco numa encosta íngreme, plantado quase totalmente com espécies nativas resistentes à seca. Os socalcos de pedra controlam a erosão e criam uma sequência de pequenos espaços exteriores."
+      },
       "images": [
         {
-          "alt": "Sable Ridge Garden — cover",
+          "alt": {
+            "en": "Sable Ridge Garden — cover",
+            "pt": "Sable Ridge Garden — imagem principal"
+          },
           "src": "/images/projects/sable-ridge-garden/cover-800.jpg",
           "srcset": {
             "480": "/images/projects/sable-ridge-garden/cover-480.jpg",
@@ -105,7 +171,10 @@
           }
         },
         {
-          "alt": "Sable Ridge Garden — detail 1",
+          "alt": {
+            "en": "Sable Ridge Garden — detail 1",
+            "pt": "Sable Ridge Garden — detalhe 1"
+          },
           "src": "/images/projects/sable-ridge-garden/detail-1-800.jpg",
           "srcset": {
             "480": "/images/projects/sable-ridge-garden/detail-1-480.jpg",
@@ -117,14 +186,29 @@
     },
     {
       "slug": "northlight-terrace",
-      "title": "Northlight Terrace",
-      "location": "Chicago, IL",
+      "title": {
+        "en": "Northlight Terrace",
+        "pt": "Northlight Terrace"
+      },
+      "location": {
+        "en": "Chicago, IL",
+        "pt": "Chicago, IL"
+      },
       "year": "2022",
-      "category": "Landscape Design",
-      "description": "A rooftop terrace for a residential tower, engineered for wind exposure and load limits. Modular planters of birch and grasses form a windbreak around a central gathering area.",
+      "category": {
+        "en": "Landscape Design",
+        "pt": "Desenho Paisagista"
+      },
+      "description": {
+        "en": "A rooftop terrace for a residential tower, engineered for wind exposure and load limits. Modular planters of birch and grasses form a windbreak around a central gathering area.",
+        "pt": "Um terraço de cobertura para uma torre residencial, concebido para a exposição ao vento e os limites de carga. Floreiras modulares com bétulas e gramíneas formam uma barreira contra o vento em torno de uma zona central de encontro."
+      },
       "images": [
         {
-          "alt": "Northlight Terrace — cover",
+          "alt": {
+            "en": "Northlight Terrace — cover",
+            "pt": "Northlight Terrace — imagem principal"
+          },
           "src": "/images/projects/northlight-terrace/cover-800.jpg",
           "srcset": {
             "480": "/images/projects/northlight-terrace/cover-480.jpg",
@@ -133,7 +217,10 @@
           }
         },
         {
-          "alt": "Northlight Terrace — detail 1",
+          "alt": {
+            "en": "Northlight Terrace — detail 1",
+            "pt": "Northlight Terrace — detalhe 1"
+          },
           "src": "/images/projects/northlight-terrace/detail-1-800.jpg",
           "srcset": {
             "480": "/images/projects/northlight-terrace/detail-1-480.jpg",
@@ -142,7 +229,10 @@
           }
         },
         {
-          "alt": "Northlight Terrace — detail 2",
+          "alt": {
+            "en": "Northlight Terrace — detail 2",
+            "pt": "Northlight Terrace — detalhe 2"
+          },
           "src": "/images/projects/northlight-terrace/detail-2-800.jpg",
           "srcset": {
             "480": "/images/projects/northlight-terrace/detail-2-480.jpg",
@@ -154,14 +244,29 @@
     },
     {
       "slug": "aurora-wetlands",
-      "title": "Aurora Wetlands",
-      "location": "Concept Visualization",
+      "title": {
+        "en": "Aurora Wetlands",
+        "pt": "Aurora Wetlands"
+      },
+      "location": {
+        "en": "Concept Visualization",
+        "pt": "Visualização Conceptual"
+      },
       "year": "2024",
-      "category": "3D Visualization",
-      "description": "Full visualization package for a proposed constructed wetland, produced ahead of a public planning review. Renders show the site across three seasons and at full plant maturity.",
+      "category": {
+        "en": "3D Visualization",
+        "pt": "Visualização 3D"
+      },
+      "description": {
+        "en": "Full visualization package for a proposed constructed wetland, produced ahead of a public planning review. Renders show the site across three seasons and at full plant maturity.",
+        "pt": "Pacote completo de visualização para uma zona húmida construída proposta, produzido antes de uma avaliação pública de planeamento. Os renders mostram o local em três estações e com a vegetação em plena maturidade."
+      },
       "images": [
         {
-          "alt": "Aurora Wetlands — cover render",
+          "alt": {
+            "en": "Aurora Wetlands — cover render",
+            "pt": "Aurora Wetlands — render principal"
+          },
           "src": "/images/projects/aurora-wetlands/cover-800.jpg",
           "srcset": {
             "480": "/images/projects/aurora-wetlands/cover-480.jpg",
@@ -170,7 +275,10 @@
           }
         },
         {
-          "alt": "Aurora Wetlands — detail render 1",
+          "alt": {
+            "en": "Aurora Wetlands — detail render 1",
+            "pt": "Aurora Wetlands — render de detalhe 1"
+          },
           "src": "/images/projects/aurora-wetlands/detail-1-800.jpg",
           "srcset": {
             "480": "/images/projects/aurora-wetlands/detail-1-480.jpg",
@@ -179,7 +287,10 @@
           }
         },
         {
-          "alt": "Aurora Wetlands — detail render 2",
+          "alt": {
+            "en": "Aurora Wetlands — detail render 2",
+            "pt": "Aurora Wetlands — render de detalhe 2"
+          },
           "src": "/images/projects/aurora-wetlands/detail-2-800.jpg",
           "srcset": {
             "480": "/images/projects/aurora-wetlands/detail-2-480.jpg",
@@ -191,14 +302,29 @@
     },
     {
       "slug": "cedar-hollow-residence",
-      "title": "Cedar Hollow Residence",
-      "location": "Concept Visualization",
+      "title": {
+        "en": "Cedar Hollow Residence",
+        "pt": "Cedar Hollow Residence"
+      },
+      "location": {
+        "en": "Concept Visualization",
+        "pt": "Visualização Conceptual"
+      },
       "year": "2022",
-      "category": "3D Visualization",
-      "description": "Pre-construction renders of a residential landscape for client approval, matched to the architect's massing model and lighting studies for the site's true orientation.",
+      "category": {
+        "en": "3D Visualization",
+        "pt": "Visualização 3D"
+      },
+      "description": {
+        "en": "Pre-construction renders of a residential landscape for client approval, matched to the architect's massing model and lighting studies for the site's true orientation.",
+        "pt": "Renders pré-construção de uma paisagem residencial para aprovação do cliente, alinhados com o modelo volumétrico do arquiteto e estudos de luz para a orientação real do terreno."
+      },
       "images": [
         {
-          "alt": "Cedar Hollow Residence — cover render",
+          "alt": {
+            "en": "Cedar Hollow Residence — cover render",
+            "pt": "Cedar Hollow Residence — render principal"
+          },
           "src": "/images/projects/cedar-hollow-residence/cover-800.jpg",
           "srcset": {
             "480": "/images/projects/cedar-hollow-residence/cover-480.jpg",
@@ -207,7 +333,10 @@
           }
         },
         {
-          "alt": "Cedar Hollow Residence — detail render 1",
+          "alt": {
+            "en": "Cedar Hollow Residence — detail render 1",
+            "pt": "Cedar Hollow Residence — render de detalhe 1"
+          },
           "src": "/images/projects/cedar-hollow-residence/detail-1-800.jpg",
           "srcset": {
             "480": "/images/projects/cedar-hollow-residence/detail-1-480.jpg",

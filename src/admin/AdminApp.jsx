@@ -1,4 +1,5 @@
 import { startTransition, useEffect, useRef, useState } from 'react';
+import { LANGUAGES, isLocalizedValue } from '../utils/language.js';
 
 const ENDPOINTS = {
   login: '/.netlify/functions/admin-login',
@@ -52,10 +53,49 @@ function setPath(root, path, value) {
   const keys = path.split('.');
   let target = root;
   for (const key of keys.slice(0, -1)) {
-    if (target[key] == null) target[key] = /^\d+$/.test(key) ? [] : {};
+    if (target[key] == null || typeof target[key] !== 'object') target[key] = /^\d+$/.test(key) ? [] : {};
     target = target[key];
   }
   target[keys.at(-1)] = value;
+}
+
+function localizedObject(value) {
+  if (isLocalizedValue(value)) return { ...value };
+  return { en: typeof value === 'string' ? value : '', pt: '' };
+}
+
+function localizedText(value, language = 'en') {
+  if (isLocalizedValue(value)) return value[language] ?? '';
+  return language === 'en' && typeof value === 'string' ? value : '';
+}
+
+function adminText(value) {
+  return localizedText(value, 'en') || localizedText(value, 'pt') || (typeof value === 'string' ? value : '');
+}
+
+function setLocalizedPath(root, path, language, value) {
+  const next = localizedObject(getPath(root, path));
+  next[language] = value;
+  setPath(root, path, next);
+}
+
+function localizedLines(value, language) {
+  return (Array.isArray(value) ? value : []).map((item) => localizedText(item, language)).join('\n');
+}
+
+function setLocalizedLines(root, path, language, value) {
+  const lines = value.split('\n').map((item) => item.trim());
+  const current = Array.isArray(getPath(root, path)) ? getPath(root, path) : [];
+  const length = Math.max(lines.length, current.length);
+  const next = [];
+
+  for (let index = 0; index < length; index += 1) {
+    const item = localizedObject(current[index]);
+    item[language] = lines[index] || '';
+    if (item.en || item.pt) next.push(item);
+  }
+
+  setPath(root, path, next);
 }
 
 function ensureImageObject(root, path) {
@@ -161,7 +201,55 @@ function TextArea({ path, label, value, onChange, rows }) {
   );
 }
 
-function ImageField({ image, label, path, removable, onAlt, onUpload, onRemove, onClear }) {
+function LocalizedField({ path, label, type = 'text', value, onChange, wide = false }) {
+  return (
+    <fieldset className={`field field--localized${wide ? ' field--wide' : ''}`}>
+      <legend>{label}</legend>
+      <div className="localized-pair">
+        {LANGUAGES.map((language) => (
+          <label className="localized-control" key={language}>
+            <span>{language.toUpperCase()}</span>
+            <input className="control" type={type} value={localizedText(value, language)} onChange={(event) => onChange(path, language, event.target.value)} />
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+function LocalizedTextArea({ path, label, value, onChange, rows }) {
+  return (
+    <fieldset className="field field--wide field--localized">
+      <legend>{label}</legend>
+      <div className="localized-pair">
+        {LANGUAGES.map((language) => (
+          <label className="localized-control" key={language}>
+            <span>{language.toUpperCase()}</span>
+            <textarea className="textarea" rows={rows} value={localizedText(value, language)} onChange={(event) => onChange(path, language, event.target.value)} />
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+function LocalizedLines({ path, label, value, onChange }) {
+  return (
+    <fieldset className="field field--wide field--localized">
+      <legend>{label}</legend>
+      <div className="localized-pair">
+        {LANGUAGES.map((language) => (
+          <label className="localized-control" key={language}>
+            <span>{language.toUpperCase()}</span>
+            <textarea className="textarea" value={localizedLines(value, language)} onChange={(event) => onChange(path, language, event.target.value)} />
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+function ImageField({ image, label, path, removable, onLocalizedChange, onUpload, onRemove, onClear }) {
   const imageObject = typeof image === 'string' ? { src: image, alt: '' } : image || {};
 
   async function handleFile(event) {
@@ -175,7 +263,7 @@ function ImageField({ image, label, path, removable, onAlt, onUpload, onRemove, 
       <div className="image-card__preview">{imageObject.src ? <img src={imageObject.src} alt="" /> : <span>No image</span>}</div>
       <div className="image-card__body">
         <div className="image-card__topline">
-          <Field path={path} label={`${label} alt text`} value={imageObject.alt || ''} onChange={onAlt} />
+          <LocalizedField path={`${path}.alt`} label={`${label} alt text`} value={imageObject.alt || ''} onChange={onLocalizedChange} />
         </div>
         <p className="image-card__hint">Upload one 2K or 4K WebP/JPG/PNG source. Smaller responsive files are generated during the site build.</p>
         <div className="image-card__actions">
@@ -356,9 +444,13 @@ export default function AdminApp() {
     });
   }
 
-  function updateImageAlt(path, value) {
+  function updateLocalizedPath(path, language, value) {
     updateContent((next) => {
-      ensureImageObject(next, path).alt = value;
+      setLocalizedPath(next, path, language, value);
+      if (path.endsWith('.title') && language === 'en') {
+        const slugPath = path.replace(/\.title$/, '.slug');
+        if (getPath(next, slugPath) === '') setPath(next, slugPath, slugify(value));
+      }
     });
   }
 
@@ -389,7 +481,16 @@ export default function AdminApp() {
   function addProject() {
     const nextIndex = content.project.projects.length;
     updateContent((next) => {
-      next.project.projects.push({ slug: '', title: '', location: '', year: '', category: '', description: '', images: [] });
+      next.project.projects.push({
+        slug: '',
+        title: { en: '', pt: '' },
+        location: { en: '', pt: '' },
+        year: '',
+        category: { en: '', pt: '' },
+        description: { en: '', pt: '' },
+        seoDescription: { en: '', pt: '' },
+        images: []
+      });
     });
     setSelectedProject(nextIndex);
   }
@@ -404,7 +505,7 @@ export default function AdminApp() {
   function addProjectImage() {
     updateContent((next) => {
       next.project.projects[selectedProject].images ??= [];
-      next.project.projects[selectedProject].images.push({ alt: 'Project image', src: '' });
+      next.project.projects[selectedProject].images.push({ alt: { en: 'Project image', pt: 'Imagem do projeto' }, src: '' });
     });
   }
 
@@ -506,7 +607,7 @@ export default function AdminApp() {
   if (!content) return <div className="notice">Content could not be loaded.</div>;
 
   const [title, copy] = SECTION_TITLES[section];
-  const imageHandlers = { onAlt: updateImageAlt, onUpload: uploadImage, onRemove: removeImage, onClear: clearImage };
+  const imageHandlers = { onLocalizedChange: updateLocalizedPath, onUpload: uploadImage, onRemove: removeImage, onClear: clearImage };
 
   return (
     <div className="admin">
@@ -530,9 +631,10 @@ export default function AdminApp() {
           selectedProject={selectedProject}
           uploads={uploads}
           onChange={updatePath}
-          onServices={(value) => updateContent((next) => { next.about.services = value.split('\n').map((item) => item.trim()).filter(Boolean); })}
+          onLocalizedChange={updateLocalizedPath}
+          onServices={(path, language, value) => updateContent((next) => { setLocalizedLines(next, path, language, value); })}
           onSelectProject={selectProject}
-          onAddHero={() => updateContent((next) => { next.homepage.hero.slides.push({ alt: 'New hero slide', src: '' }); })}
+          onAddHero={() => updateContent((next) => { next.homepage.hero.slides.push({ alt: { en: 'New hero slide', pt: 'Novo slide principal' }, src: '' }); })}
           onAddProject={addProject}
           onRemoveProject={removeProject}
           onAddProjectImage={addProjectImage}
@@ -581,20 +683,20 @@ function Dashboard({ content, uploads }) {
   );
 }
 
-function SiteSection({ content, onChange, onAddSocial, onRemoveSocial }) {
+function SiteSection({ content, onChange, onLocalizedChange, onAddSocial, onRemoveSocial }) {
   const socials = content.site?.socials || [];
   return (
     <section className="grid">
       <div className="panel panel--half"><h2>Identity</h2><div className="form-grid">
         <Field path="site.name" label="Studio name" value={getPath(content, 'site.name')} onChange={onChange} />
-        <Field path="site.tagline" label="Tagline" value={getPath(content, 'site.tagline')} onChange={onChange} />
+        <LocalizedField path="site.tagline" label="Tagline" value={getPath(content, 'site.tagline')} onChange={onLocalizedChange} />
         <Field path="site.logo" label="Logo URL" value={getPath(content, 'site.logo')} onChange={onChange} wide />
       </div></div>
       <div className="panel panel--half"><h2>SEO and analytics</h2><div className="form-grid">
         <Field path="site.seo.siteUrl" label="Site URL" value={getPath(content, 'site.seo.siteUrl')} onChange={onChange} />
-        <Field path="site.seo.titleTemplate" label="Title template" value={getPath(content, 'site.seo.titleTemplate')} onChange={onChange} />
-        <Field path="site.seo.defaultTitle" label="Default title" value={getPath(content, 'site.seo.defaultTitle')} onChange={onChange} wide />
-        <TextArea path="site.seo.defaultDescription" label="Default description" value={getPath(content, 'site.seo.defaultDescription')} onChange={onChange} />
+        <LocalizedField path="site.seo.titleTemplate" label="Title template" value={getPath(content, 'site.seo.titleTemplate')} onChange={onLocalizedChange} />
+        <LocalizedField path="site.seo.defaultTitle" label="Default title" value={getPath(content, 'site.seo.defaultTitle')} onChange={onLocalizedChange} wide />
+        <LocalizedTextArea path="site.seo.defaultDescription" label="Default description" value={getPath(content, 'site.seo.defaultDescription')} onChange={onLocalizedChange} />
         <Field path="site.seo.ogImage" label="Default OG image" value={getPath(content, 'site.seo.ogImage')} onChange={onChange} wide />
         <Field path="site.analytics.gaMeasurementId" label="GA Measurement ID" value={getPath(content, 'site.analytics.gaMeasurementId')} onChange={onChange} />
       </div></div>
@@ -621,13 +723,13 @@ function SiteSection({ content, onChange, onAddSocial, onRemoveSocial }) {
   );
 }
 
-function HomeSection({ content, onChange, onAddHero, imageHandlers }) {
+function HomeSection({ content, onChange, onLocalizedChange, onAddHero, imageHandlers }) {
   const slides = content.homepage?.hero?.slides || [];
   return (
     <section className="grid">
       <div className="panel panel--full"><h2>Copy</h2><div className="form-grid">
-        <TextArea path="homepage.intro" label="Intro" value={getPath(content, 'homepage.intro')} onChange={onChange} />
-        <TextArea path="homepage.seo.description" label="SEO description" value={getPath(content, 'homepage.seo.description')} onChange={onChange} />
+        <LocalizedTextArea path="homepage.intro" label="Intro" value={getPath(content, 'homepage.intro')} onChange={onLocalizedChange} />
+        <LocalizedTextArea path="homepage.seo.description" label="SEO description" value={getPath(content, 'homepage.seo.description')} onChange={onLocalizedChange} />
         <Field path="homepage.hero.intervalMs" label="Hero interval (ms)" type="number" value={getPath(content, 'homepage.hero.intervalMs')} onChange={onChange} />
       </div></div>
       <div className="panel panel--full"><PanelHeader title="Hero slides" action="Add slide" onAction={onAddHero} /><div className="cards">
@@ -637,19 +739,19 @@ function HomeSection({ content, onChange, onAddHero, imageHandlers }) {
   );
 }
 
-function WorkSection({ content, onChange }) {
+function WorkSection({ content, onLocalizedChange }) {
   return (
     <section className="grid">
       <div className="panel panel--full"><h2>Work listing</h2><div className="form-grid">
-        <Field path="work.heading" label="Heading" value={getPath(content, 'work.heading')} onChange={onChange} />
-        <Field path="work.seo.title" label="SEO title" value={getPath(content, 'work.seo.title')} onChange={onChange} />
-        <TextArea path="work.seo.description" label="SEO description" value={getPath(content, 'work.seo.description')} onChange={onChange} />
+        <LocalizedField path="work.heading" label="Heading" value={getPath(content, 'work.heading')} onChange={onLocalizedChange} />
+        <LocalizedField path="work.seo.title" label="SEO title" value={getPath(content, 'work.seo.title')} onChange={onLocalizedChange} />
+        <LocalizedTextArea path="work.seo.description" label="SEO description" value={getPath(content, 'work.seo.description')} onChange={onLocalizedChange} />
       </div></div>
     </section>
   );
 }
 
-function ProjectsSection({ content, selectedProject, onSelectProject, onChange, onAddProject, onRemoveProject, onAddProjectImage, imageHandlers }) {
+function ProjectsSection({ content, selectedProject, onSelectProject, onChange, onLocalizedChange, onAddProject, onRemoveProject, onAddProjectImage, imageHandlers }) {
   const projects = content.project?.projects || [];
   const project = projects[selectedProject];
   return (
@@ -658,29 +760,29 @@ function ProjectsSection({ content, selectedProject, onSelectProject, onChange, 
         <label className="field">
           <span>Selected project</span>
           <select className="control" value={selectedProject} onChange={(event) => onSelectProject(Number(event.target.value))}>
-            {projects.map((item, index) => <option key={item.slug || index} value={index}>{item.title || 'Untitled project'} - {item.year || 'No year'}</option>)}
+            {projects.map((item, index) => <option key={item.slug || index} value={index}>{adminText(item.title) || 'Untitled project'} - {item.year || 'No year'}</option>)}
           </select>
         </label>
         <button className="button button--accent" type="button" onClick={onAddProject}>Add project</button>
       </div>
-      <div className="panel">{project ? <ProjectEditor project={project} index={selectedProject} onChange={onChange} onRemoveProject={onRemoveProject} onAddProjectImage={onAddProjectImage} imageHandlers={imageHandlers} /> : <p className="notice">Add a project to begin.</p>}</div>
+      <div className="panel">{project ? <ProjectEditor project={project} index={selectedProject} onChange={onChange} onLocalizedChange={onLocalizedChange} onRemoveProject={onRemoveProject} onAddProjectImage={onAddProjectImage} imageHandlers={imageHandlers} /> : <p className="notice">Add a project to begin.</p>}</div>
     </section>
   );
 }
 
-function ProjectEditor({ project, index, onChange, onRemoveProject, onAddProjectImage, imageHandlers }) {
+function ProjectEditor({ project, index, onChange, onLocalizedChange, onRemoveProject, onAddProjectImage, imageHandlers }) {
   const images = project.images || [];
   return (
     <>
-      <h2 className="project-title">{project.title || 'Untitled project'}</h2>
+      <h2 className="project-title">{adminText(project.title) || 'Untitled project'}</h2>
       <div className="form-grid">
-        <Field path={`project.projects.${index}.title`} label="Title" value={project.title} onChange={onChange} />
+        <LocalizedField path={`project.projects.${index}.title`} label="Title" value={project.title} onChange={onLocalizedChange} />
         <Field path={`project.projects.${index}.slug`} label="Slug" value={project.slug} onChange={onChange} />
-        <Field path={`project.projects.${index}.location`} label="Location" value={project.location} onChange={onChange} />
+        <LocalizedField path={`project.projects.${index}.location`} label="Location" value={project.location} onChange={onLocalizedChange} />
         <Field path={`project.projects.${index}.year`} label="Year" value={project.year} onChange={onChange} />
-        <Field path={`project.projects.${index}.category`} label="Category" value={project.category} onChange={onChange} />
-        <TextArea path={`project.projects.${index}.description`} label="Description" value={project.description} onChange={onChange} />
-        <TextArea path={`project.projects.${index}.seoDescription`} label="SEO description" value={project.seoDescription} onChange={onChange} />
+        <LocalizedField path={`project.projects.${index}.category`} label="Category" value={project.category} onChange={onLocalizedChange} />
+        <LocalizedTextArea path={`project.projects.${index}.description`} label="Description" value={project.description} onChange={onLocalizedChange} />
+        <LocalizedTextArea path={`project.projects.${index}.seoDescription`} label="SEO description" value={project.seoDescription} onChange={onLocalizedChange} />
       </div>
       <PanelHeader title="Images" action="Add image" onAction={onAddProjectImage} />
       <div className="cards">{images.map((image, imageIndex) => <ImageField key={imageIndex} image={image} path={`project.projects.${index}.images.${imageIndex}`} label={`Image ${imageIndex + 1}`} removable {...imageHandlers} />)}</div>
@@ -689,41 +791,41 @@ function ProjectEditor({ project, index, onChange, onRemoveProject, onAddProject
   );
 }
 
-function AboutSection({ content, onChange, onServices, imageHandlers }) {
+function AboutSection({ content, onLocalizedChange, onServices, imageHandlers }) {
   return (
     <section className="grid">
       <div className="panel panel--half"><h2>Story</h2><div className="form-grid">
-        <Field path="about.heading" label="Heading" value={getPath(content, 'about.heading')} onChange={onChange} />
-        <TextArea path="about.bio" label="Bio" value={getPath(content, 'about.bio')} onChange={onChange} />
-        <Field path="about.servicesHeading" label="Services heading" value={getPath(content, 'about.servicesHeading')} onChange={onChange} />
-        <label className="field field--wide"><span>Services, one per line</span><textarea className="textarea" value={(content.about?.services || []).join('\n')} onChange={(event) => onServices(event.target.value)} /></label>
+        <LocalizedField path="about.heading" label="Heading" value={getPath(content, 'about.heading')} onChange={onLocalizedChange} />
+        <LocalizedTextArea path="about.bio" label="Bio" value={getPath(content, 'about.bio')} onChange={onLocalizedChange} />
+        <LocalizedField path="about.servicesHeading" label="Services heading" value={getPath(content, 'about.servicesHeading')} onChange={onLocalizedChange} />
+        <LocalizedLines path="about.services" label="Services, one per line" value={content.about?.services} onChange={onServices} />
       </div></div>
       <div className="panel panel--half"><h2>Portrait</h2><div className="cards"><ImageField image={content.about?.portrait} path="about.portrait" label="Portrait" {...imageHandlers} /></div></div>
-      <div className="panel panel--full"><h2>SEO</h2><div className="form-grid"><Field path="about.seo.title" label="SEO title" value={getPath(content, 'about.seo.title')} onChange={onChange} /><TextArea path="about.seo.description" label="SEO description" value={getPath(content, 'about.seo.description')} onChange={onChange} /></div></div>
+      <div className="panel panel--full"><h2>SEO</h2><div className="form-grid"><LocalizedField path="about.seo.title" label="SEO title" value={getPath(content, 'about.seo.title')} onChange={onLocalizedChange} /><LocalizedTextArea path="about.seo.description" label="SEO description" value={getPath(content, 'about.seo.description')} onChange={onLocalizedChange} /></div></div>
     </section>
   );
 }
 
-function ContactSection({ content, onChange }) {
+function ContactSection({ content, onChange, onLocalizedChange }) {
   return (
     <section className="grid">
       <div className="panel panel--half"><h2>Details</h2><div className="form-grid">
-        <Field path="contact.heading" label="Heading" value={getPath(content, 'contact.heading')} onChange={onChange} />
+        <LocalizedField path="contact.heading" label="Heading" value={getPath(content, 'contact.heading')} onChange={onLocalizedChange} />
         <Field path="contact.email" label="Email" type="email" value={getPath(content, 'contact.email')} onChange={onChange} />
         <Field path="contact.phone" label="Phone" value={getPath(content, 'contact.phone')} onChange={onChange} />
-        <Field path="contact.location" label="Location" value={getPath(content, 'contact.location')} onChange={onChange} />
+        <LocalizedField path="contact.location" label="Location" value={getPath(content, 'contact.location')} onChange={onLocalizedChange} />
       </div></div>
       <div className="panel panel--half"><h2>Form</h2><div className="form-grid">
-        <Field path="contact.form.namePlaceholder" label="Name placeholder" value={getPath(content, 'contact.form.namePlaceholder')} onChange={onChange} />
-        <Field path="contact.form.emailPlaceholder" label="Email placeholder" value={getPath(content, 'contact.form.emailPlaceholder')} onChange={onChange} />
-        <Field path="contact.form.messagePlaceholder" label="Message placeholder" value={getPath(content, 'contact.form.messagePlaceholder')} onChange={onChange} />
-        <Field path="contact.form.submitLabel" label="Submit label" value={getPath(content, 'contact.form.submitLabel')} onChange={onChange} />
+        <LocalizedField path="contact.form.namePlaceholder" label="Name placeholder" value={getPath(content, 'contact.form.namePlaceholder')} onChange={onLocalizedChange} />
+        <LocalizedField path="contact.form.emailPlaceholder" label="Email placeholder" value={getPath(content, 'contact.form.emailPlaceholder')} onChange={onLocalizedChange} />
+        <LocalizedField path="contact.form.messagePlaceholder" label="Message placeholder" value={getPath(content, 'contact.form.messagePlaceholder')} onChange={onLocalizedChange} />
+        <LocalizedField path="contact.form.submitLabel" label="Submit label" value={getPath(content, 'contact.form.submitLabel')} onChange={onLocalizedChange} />
         <Field path="contact.form.web3formsAccessKey" label="Web3Forms key" value={getPath(content, 'contact.form.web3formsAccessKey')} onChange={onChange} />
-        <Field path="contact.form.subject" label="Subject" value={getPath(content, 'contact.form.subject')} onChange={onChange} wide />
-        <Field path="contact.form.fromName" label="From name" value={getPath(content, 'contact.form.fromName')} onChange={onChange} />
-        <TextArea path="contact.form.thanksMessage" label="Thanks message" value={getPath(content, 'contact.form.thanksMessage')} onChange={onChange} />
+        <LocalizedField path="contact.form.subject" label="Subject" value={getPath(content, 'contact.form.subject')} onChange={onLocalizedChange} wide />
+        <LocalizedField path="contact.form.fromName" label="From name" value={getPath(content, 'contact.form.fromName')} onChange={onLocalizedChange} />
+        <LocalizedTextArea path="contact.form.thanksMessage" label="Thanks message" value={getPath(content, 'contact.form.thanksMessage')} onChange={onLocalizedChange} />
       </div></div>
-      <div className="panel panel--full"><h2>SEO</h2><div className="form-grid"><Field path="contact.seo.title" label="SEO title" value={getPath(content, 'contact.seo.title')} onChange={onChange} /><TextArea path="contact.seo.description" label="SEO description" value={getPath(content, 'contact.seo.description')} onChange={onChange} /></div></div>
+      <div className="panel panel--full"><h2>SEO</h2><div className="form-grid"><LocalizedField path="contact.seo.title" label="SEO title" value={getPath(content, 'contact.seo.title')} onChange={onLocalizedChange} /><LocalizedTextArea path="contact.seo.description" label="SEO description" value={getPath(content, 'contact.seo.description')} onChange={onLocalizedChange} /></div></div>
     </section>
   );
 }

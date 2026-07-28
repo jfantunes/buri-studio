@@ -1,20 +1,53 @@
 {
   "seo": {
-    "title": "Contact",
-    "description": "Get in touch with Buri Studio about landscape architecture and 3D visualization projects."
+    "title": {
+      "en": "Contact",
+      "pt": "Contacto"
+    },
+    "description": {
+      "en": "Get in touch with Buri Studio about landscape architecture and 3D visualization projects.",
+      "pt": "Entre em contacto com a Buri Studio sobre projetos de arquitetura paisagista e visualização 3D."
+    }
   },
-  "heading": "Contact",
+  "heading": {
+    "en": "Contact",
+    "pt": "Contacto"
+  },
   "email": "studio@buristudio.com",
   "phone": "+1 (512) 555-0148",
-  "location": "Austin, Texas",
+  "location": {
+    "en": "Austin, Texas",
+    "pt": "Austin, Texas"
+  },
   "form": {
-    "namePlaceholder": "Name",
-    "emailPlaceholder": "Email",
-    "messagePlaceholder": "Project details",
-    "submitLabel": "Send",
+    "namePlaceholder": {
+      "en": "Name",
+      "pt": "Nome"
+    },
+    "emailPlaceholder": {
+      "en": "Email",
+      "pt": "Email"
+    },
+    "messagePlaceholder": {
+      "en": "Project details",
+      "pt": "Detalhes do projeto"
+    },
+    "submitLabel": {
+      "en": "Send",
+      "pt": "Enviar"
+    },
     "web3formsAccessKey": "",
-    "subject": "New project inquiry from Buri Studio",
-    "fromName": "Buri Studio website",
-    "thanksMessage": "Thanks for contacting Buri Studio. We will get back to you soon."
+    "subject": {
+      "en": "New project inquiry from Buri Studio",
+      "pt": "Novo pedido de projeto a partir do site da Buri Studio"
+    },
+    "fromName": {
+      "en": "Buri Studio website",
+      "pt": "Site da Buri Studio"
+    },
+    "thanksMessage": {
+      "en": "Thanks for contacting Buri Studio. We will get back to you soon.",
+      "pt": "Obrigado por contactar a Buri Studio. Responderemos em breve."
+    }
   }
 }

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import ResponsiveImage from './ResponsiveImage.jsx';
+import { useLanguage } from '../context/LanguageContext.jsx';
 import './ImageSlider.css';
 
 export default function ImageSlider({ images, title }) {
+  const { t } = useLanguage();
   const [index, setIndex] = useState(0);
   const total = images.length;
   if (total === 0) return null;
@@ -32,7 +34,7 @@ export default function ImageSlider({ images, title }) {
             type="button"
             className="slider__arrow slider__arrow--prev"
             onClick={() => go(index - 1)}
-            aria-label="Previous image"
+            aria-label={t('slider.previousImage')}
           >
             ←
           </button>
@@ -40,7 +42,7 @@ export default function ImageSlider({ images, title }) {
             type="button"
             className="slider__arrow slider__arrow--next"
             onClick={() => go(index + 1)}
-            aria-label="Next image"
+            aria-label={t('slider.nextImage')}
           >
             →
           </button>
@@ -51,7 +53,7 @@ export default function ImageSlider({ images, title }) {
                 type="button"
                 className={`slider__dot${i === index ? ' is-active' : ''}`}
                 onClick={() => go(i)}
-                aria-label={`Go to image ${i + 1}`}
+                aria-label={t('slider.goToImage').replace('%s', i + 1)}
               />
             ))}
           </div>

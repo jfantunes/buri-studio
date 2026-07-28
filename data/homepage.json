@@ -1,13 +1,22 @@
 {
   "seo": {
-    "description": "Buri Studio designs gardens, parks and outdoor spaces, and produces the photorealistic 3D renders that let clients see them before a single stone is placed."
+    "description": {
+      "en": "Buri Studio designs gardens, parks and outdoor spaces, and produces the photorealistic 3D renders that let clients see them before a single stone is placed.",
+      "pt": "A Buri Studio desenha jardins, parques e espaços exteriores, e produz renders 3D fotorrealistas que permitem aos clientes vê-los antes da colocação da primeira pedra."
+    }
   },
-  "intro": "We design gardens, parks, and outdoor spaces, and produce the photorealistic renders that let clients see them before a single stone is placed.",
+  "intro": {
+    "en": "We design gardens, parks, and outdoor spaces, and produce the photorealistic renders that let clients see them before a single stone is placed.",
+    "pt": "Desenhamos jardins, parques e espaços exteriores, e produzimos renders fotorrealistas que permitem aos clientes vê-los antes da colocação da primeira pedra."
+  },
   "hero": {
     "intervalMs": 5000,
     "slides": [
       {
-        "alt": "Landscape photograph — hero 1",
+        "alt": {
+          "en": "Landscape photograph — hero 1",
+          "pt": "Fotografia de paisagem — destaque 1"
+        },
         "src": "/images/hero/hero-1-800.jpg",
         "srcset": {
           "480": "/images/hero/hero-1-480.jpg",
@@ -16,7 +25,10 @@
         }
       },
       {
-        "alt": "Landscape photograph — hero 2",
+        "alt": {
+          "en": "Landscape photograph — hero 2",
+          "pt": "Fotografia de paisagem — destaque 2"
+        },
         "src": "/images/hero/hero-2-800.jpg",
         "srcset": {
           "480": "/images/hero/hero-2-480.jpg",
@@ -25,7 +37,10 @@
         }
       },
       {
-        "alt": "Landscape photograph — hero 3",
+        "alt": {
+          "en": "Landscape photograph — hero 3",
+          "pt": "Fotografia de paisagem — destaque 3"
+        },
         "src": "/images/hero/hero-3-800.jpg",
         "srcset": {
           "480": "/images/hero/hero-3-480.jpg",
@@ -34,7 +49,10 @@
         }
       },
       {
-        "alt": "Landscape photograph — hero 4",
+        "alt": {
+          "en": "Landscape photograph — hero 4",
+          "pt": "Fotografia de paisagem — destaque 4"
+        },
         "src": "/images/hero/hero-4-800.jpg",
         "srcset": {
           "480": "/images/hero/hero-4-480.jpg",

@@ -1,6 +1,9 @@
 {
   "name": "Buri Studio",
-  "tagline": "Landscape Architecture & Visualization",
+  "tagline": {
+    "en": "Landscape Architecture & Visualization",
+    "pt": "Arquitetura Paisagista e Visualização"
+  },
   "logo": "",
   "socials": [
     {
@@ -11,9 +14,18 @@
   ],
   "seo": {
     "siteUrl": "https://www.buristudio.com",
-    "titleTemplate": "Buri Studio",
-    "defaultTitle": "Buri Studio - Landscape Architecture & 3D Visualization",
-    "defaultDescription": "Buri Studio is a landscape architecture and 3D visualization practice designing gardens, parks and outdoor spaces, and producing photorealistic renders before a single stone is placed.",
+    "titleTemplate": {
+      "en": "Buri Studio",
+      "pt": "Buri Studio"
+    },
+    "defaultTitle": {
+      "en": "Buri Studio - Landscape Architecture & 3D Visualization",
+      "pt": "Buri Studio - Arquitetura Paisagista e Visualização 3D"
+    },
+    "defaultDescription": {
+      "en": "Buri Studio is a landscape architecture and 3D visualization practice designing gardens, parks and outdoor spaces, and producing photorealistic renders before a single stone is placed.",
+      "pt": "A Buri Studio é um atelier de arquitetura paisagista e visualização 3D que desenha jardins, parques e espaços exteriores, criando renders fotorrealistas antes da colocação da primeira pedra."
+    },
     "ogImage": "/images/og-default.svg"
   },
   "analytics": {

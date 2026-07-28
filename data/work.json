@@ -1,7 +1,16 @@
 {
   "seo": {
-    "title": "Work",
-    "description": "Selected landscape architecture and 3D visualization projects by Buri Studio - gardens, public parks, rooftop terraces and concept visualizations."
+    "title": {
+      "en": "Work",
+      "pt": "Projetos"
+    },
+    "description": {
+      "en": "Selected landscape architecture and 3D visualization projects by Buri Studio - gardens, public parks, rooftop terraces and concept visualizations.",
+      "pt": "Projetos selecionados de arquitetura paisagista e visualização 3D da Buri Studio - jardins, parques públicos, terraços e visualizações conceptuais."
+    }
   },
-  "heading": "Work"
+  "heading": {
+    "en": "Work",
+    "pt": "Projetos"
+  }
 }

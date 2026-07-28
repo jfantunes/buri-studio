@@ -2,26 +2,35 @@ import { useEffect, useRef, useState } from 'react';
 import Seo from '../components/Seo.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
 import { useContent } from '../hooks/useContent.js';
+import { useLanguage } from '../context/LanguageContext.jsx';
 import './WorkPage.css';
 
 const FILTER_FADE_MS = 240;
 
 export default function WorkPage() {
   const { work, projects } = useContent();
-  const [filter, setFilter] = useState('All');
-  const [visibleFilter, setVisibleFilter] = useState('All');
+  const { t } = useLanguage();
+  const allLabel = t('work.all');
+  const [filter, setFilter] = useState(allLabel);
+  const [visibleFilter, setVisibleFilter] = useState(allLabel);
   const [isFading, setIsFading] = useState(false);
   const fadeTimeoutRef = useRef(null);
 
   const categories = [...new Set(projects.map((p) => p.category))];
-  const tabs = ['All', ...categories];
-  const visible = visibleFilter === 'All' ? projects : projects.filter((p) => p.category === visibleFilter);
+  const tabs = [allLabel, ...categories];
+  const visible = visibleFilter === allLabel ? projects : projects.filter((p) => p.category === visibleFilter);
 
   useEffect(() => {
     return () => {
       clearTimeout(fadeTimeoutRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    setFilter(allLabel);
+    setVisibleFilter(allLabel);
+    setIsFading(false);
+  }, [allLabel]);
 
   function handleFilterChange(tab) {
     if (tab === filter) return;
@@ -54,8 +63,8 @@ export default function WorkPage() {
     <>
       <Seo title={work?.seo?.title} description={work?.seo?.description} path="/work" />
       <section className="work">
-        <h1 className="page-heading">{work?.heading || 'Work'}</h1>
-        <div className="work__tabs" role="tablist" aria-label="Filter projects">
+        <h1 className="page-heading">{work?.heading || t('nav.work')}</h1>
+        <div className="work__tabs" role="tablist" aria-label={t('work.filtersLabel')}>
           {tabs.map((tab) => (
             <button
               key={tab}

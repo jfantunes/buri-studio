@@ -126,6 +126,34 @@ a {
   text-transform: uppercase;
 }
 
+.field--localized {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.field--localized legend {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.localized-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.localized-control {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+
 .control,
 .textarea {
   width: 100%;
@@ -616,6 +644,7 @@ a {
   .deploy-card,
   .form-grid,
   .image-card__topline,
+  .localized-pair,
   .metrics,
   .project-picker,
   .social-row {

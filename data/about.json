@@ -1,11 +1,23 @@
 {
   "seo": {
-    "title": "About",
-    "description": "Buri Studio is a landscape architecture practice working across residential gardens, public parks and rooftop terraces, with an in-house 3D visualization team."
+    "title": {
+      "en": "About",
+      "pt": "Sobre"
+    },
+    "description": {
+      "en": "Buri Studio is a landscape architecture practice working across residential gardens, public parks and rooftop terraces, with an in-house 3D visualization team.",
+      "pt": "A Buri Studio é um atelier de arquitetura paisagista que trabalha em jardins residenciais, parques públicos e terraços, com uma equipa interna de visualização 3D."
+    }
   },
-  "heading": "About",
+  "heading": {
+    "en": "About",
+    "pt": "Sobre"
+  },
   "portrait": {
-    "alt": "Studio portrait",
+    "alt": {
+      "en": "Studio portrait",
+      "pt": "Retrato do atelier"
+    },
     "src": "/images/portrait-800.jpg",
     "srcset": {
       "480": "/images/portrait-480.jpg",
@@ -13,13 +25,34 @@
       "1200": "/images/portrait-1200.jpg"
     }
   },
-  "bio": "Buri Studio is a landscape architecture practice working across residential gardens, public parks, and rooftop terraces. Alongside built work, we produce 3D visualizations for architects and developers who need to see a space before it exists.",
-  "servicesHeading": "Services",
+  "bio": {
+    "en": "Buri Studio is a landscape architecture practice working across residential gardens, public parks, and rooftop terraces. Alongside built work, we produce 3D visualizations for architects and developers who need to see a space before it exists.",
+    "pt": "A Buri Studio é um atelier de arquitetura paisagista que trabalha em jardins residenciais, parques públicos e terraços. Além da obra construída, produzimos visualizações 3D para arquitetos e promotores que precisam de ver um espaço antes de ele existir."
+  },
+  "servicesHeading": {
+    "en": "Services",
+    "pt": "Serviços"
+  },
   "services": [
-    "Landscape Design",
-    "Planting Design",
-    "3D Visualization & Rendering",
-    "Site Planning",
-    "Construction Documentation"
+    {
+      "en": "Landscape Design",
+      "pt": "Desenho Paisagista"
+    },
+    {
+      "en": "Planting Design",
+      "pt": "Desenho de Plantação"
+    },
+    {
+      "en": "3D Visualization & Rendering",
+      "pt": "Visualização 3D e Rendering"
+    },
+    {
+      "en": "Site Planning",
+      "pt": "Planeamento do Local"
+    },
+    {
+      "en": "Construction Documentation",
+      "pt": "Documentação de Construção"
+    }
   ]
 }
