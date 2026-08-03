@@ -1,30 +1,30 @@
 {
-  "name": "Buri Studio",
+  "name": "Alexandra Azevedo",
   "tagline": {
-    "en": "Landscape Architecture & Visualization",
-    "pt": "Arquitetura Paisagista e Visualização"
+    "en": "Landscape Architecture | Architectural Visualization ",
+    "pt": "Arquitetura Paisagista | Visualização de arquitectura"
   },
   "logo": "",
   "socials": [
     {
       "label": "Instagram",
       "handle": "@buristudio",
-      "url": "https://instagram.com/buristudio"
+      "url": "https://www.instagram.com/alexandrazevedoap/"
     }
   ],
   "seo": {
     "siteUrl": "https://www.buristudio.com",
     "titleTemplate": {
-      "en": "Buri Studio",
-      "pt": "Buri Studio"
+      "en": "Alexandra Azevedo",
+      "pt": "Alexandra Azevedo"
     },
     "defaultTitle": {
-      "en": "Buri Studio - Landscape Architecture & 3D Visualization",
-      "pt": "Buri Studio - Arquitetura Paisagista e Visualização 3D"
+      "en": "Alexandra Azevedo - Landscape Architecture | Architectural Visualization ",
+      "pt": "Alexandra Azevedo - Arquitetura Paisagista | Visualização de arquitectura"
     },
     "defaultDescription": {
-      "en": "Buri Studio is a landscape architecture and 3D visualization practice designing gardens, parks and outdoor spaces, and producing photorealistic renders before a single stone is placed.",
-      "pt": "A Buri Studio é um atelier de arquitetura paisagista e visualização 3D que desenha jardins, parques e espaços exteriores, criando renders fotorrealistas antes da colocação da primeira pedra."
+      "en": "Landscape Architect & Architectural Visualization Artist creating thoughful, atmosferic and photorealistic imagery for architecture, landscape and interior design.",
+      "pt": "Arquiteta paisagista e artista de visualização de arquitectura que cria imagens atmosféricas e fotorrealistas para arquitetura, paisagismo e design de interiores."
     },
     "ogImage": "/images/og-default.svg"
   },
