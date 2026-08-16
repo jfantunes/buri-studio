@@ -11,284 +11,6 @@
   },
   "projects": [
     {
-      "slug": "two-rivers-park",
-      "title": {
-        "en": "Two Rivers Park",
-        "pt": "Two Rivers Park"
-      },
-      "location": {
-        "en": "Portland, OR",
-        "pt": "Portland, OR"
-      },
-      "year": "2023",
-      "category": {
-        "en": "Landscape Design",
-        "pt": "Desenho Paisagista"
-      },
-      "description": {
-        "en": "A four-acre public park at the confluence of two waterways. Terraced wetland plantings manage stormwater while a raised boardwalk keeps the floodplain accessible year-round.",
-        "pt": "Um parque público de quatro acres na confluência de dois cursos de água. Plantações de zonas húmidas em socalcos gerem as águas pluviais, enquanto um passadiço elevado mantém a planície aluvial acessível durante todo o ano."
-      },
-      "images": [
-        {
-          "alt": {
-            "en": "Two Rivers Park — cover",
-            "pt": "Two Rivers Park — imagem principal"
-          },
-          "src": "/images/projects/two-rivers-park/cover-800.jpg",
-          "srcset": {
-            "480": "/images/projects/two-rivers-park/cover-480.jpg",
-            "800": "/images/projects/two-rivers-park/cover-800.jpg",
-            "1600": "/images/projects/two-rivers-park/cover-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Two Rivers Park — detail 1",
-            "pt": "Two Rivers Park — detalhe 1"
-          },
-          "src": "/images/projects/two-rivers-park/detail-1-800.jpg",
-          "srcset": {
-            "480": "/images/projects/two-rivers-park/detail-1-480.jpg",
-            "800": "/images/projects/two-rivers-park/detail-1-800.jpg",
-            "1600": "/images/projects/two-rivers-park/detail-1-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Two Rivers Park — detail 2",
-            "pt": "Two Rivers Park — detalhe 2"
-          },
-          "src": "/images/projects/two-rivers-park/detail-2-800.jpg",
-          "srcset": {
-            "480": "/images/projects/two-rivers-park/detail-2-480.jpg",
-            "800": "/images/projects/two-rivers-park/detail-2-800.jpg",
-            "1600": "/images/projects/two-rivers-park/detail-2-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Two Rivers Park — detail 3",
-            "pt": "Two Rivers Park — detalhe 3"
-          },
-          "src": "/images/projects/two-rivers-park/detail-3-800.jpg",
-          "srcset": {
-            "480": "/images/projects/two-rivers-park/detail-3-480.jpg",
-            "800": "/images/projects/two-rivers-park/detail-3-800.jpg",
-            "1600": "/images/projects/two-rivers-park/detail-3-1600.jpg"
-          }
-        }
-      ]
-    },
-    {
-      "slug": "sable-ridge-garden",
-      "title": {
-        "en": "Sable Ridge Garden",
-        "pt": "Sable Ridge Garden"
-      },
-      "location": {
-        "en": "Sonoma, CA",
-        "pt": "Sonoma, CA"
-      },
-      "year": "2023",
-      "category": {
-        "en": "Landscape Design",
-        "pt": "Desenho Paisagista"
-      },
-      "description": {
-        "en": "A dry garden on a steep hillside site, planted almost entirely with drought-tolerant natives. Stone terracing controls erosion and creates a sequence of small outdoor rooms.",
-        "pt": "Um jardim seco numa encosta íngreme, plantado quase totalmente com espécies nativas resistentes à seca. Os socalcos de pedra controlam a erosão e criam uma sequência de pequenos espaços exteriores."
-      },
-      "images": [
-        {
-          "alt": {
-            "en": "Sable Ridge Garden — cover",
-            "pt": "Sable Ridge Garden — imagem principal"
-          },
-          "src": "/images/projects/sable-ridge-garden/cover-800.jpg",
-          "srcset": {
-            "480": "/images/projects/sable-ridge-garden/cover-480.jpg",
-            "800": "/images/projects/sable-ridge-garden/cover-800.jpg",
-            "1600": "/images/projects/sable-ridge-garden/cover-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Sable Ridge Garden — detail 1",
-            "pt": "Sable Ridge Garden — detalhe 1"
-          },
-          "src": "/images/projects/sable-ridge-garden/detail-1-800.jpg",
-          "srcset": {
-            "480": "/images/projects/sable-ridge-garden/detail-1-480.jpg",
-            "800": "/images/projects/sable-ridge-garden/detail-1-800.jpg",
-            "1600": "/images/projects/sable-ridge-garden/detail-1-1600.jpg"
-          }
-        }
-      ]
-    },
-    {
-      "slug": "northlight-terrace",
-      "title": {
-        "en": "Northlight Terrace",
-        "pt": "Northlight Terrace"
-      },
-      "location": {
-        "en": "Chicago, IL",
-        "pt": "Chicago, IL"
-      },
-      "year": "2022",
-      "category": {
-        "en": "Landscape Design",
-        "pt": "Desenho Paisagista"
-      },
-      "description": {
-        "en": "A rooftop terrace for a residential tower, engineered for wind exposure and load limits. Modular planters of birch and grasses form a windbreak around a central gathering area.",
-        "pt": "Um terraço de cobertura para uma torre residencial, concebido para a exposição ao vento e os limites de carga. Floreiras modulares com bétulas e gramíneas formam uma barreira contra o vento em torno de uma zona central de encontro."
-      },
-      "images": [
-        {
-          "alt": {
-            "en": "Northlight Terrace — cover",
-            "pt": "Northlight Terrace — imagem principal"
-          },
-          "src": "/images/projects/northlight-terrace/cover-800.jpg",
-          "srcset": {
-            "480": "/images/projects/northlight-terrace/cover-480.jpg",
-            "800": "/images/projects/northlight-terrace/cover-800.jpg",
-            "1600": "/images/projects/northlight-terrace/cover-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Northlight Terrace — detail 1",
-            "pt": "Northlight Terrace — detalhe 1"
-          },
-          "src": "/images/projects/northlight-terrace/detail-1-800.jpg",
-          "srcset": {
-            "480": "/images/projects/northlight-terrace/detail-1-480.jpg",
-            "800": "/images/projects/northlight-terrace/detail-1-800.jpg",
-            "1600": "/images/projects/northlight-terrace/detail-1-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Northlight Terrace — detail 2",
-            "pt": "Northlight Terrace — detalhe 2"
-          },
-          "src": "/images/projects/northlight-terrace/detail-2-800.jpg",
-          "srcset": {
-            "480": "/images/projects/northlight-terrace/detail-2-480.jpg",
-            "800": "/images/projects/northlight-terrace/detail-2-800.jpg",
-            "1600": "/images/projects/northlight-terrace/detail-2-1600.jpg"
-          }
-        }
-      ]
-    },
-    {
-      "slug": "aurora-wetlands",
-      "title": {
-        "en": "Aurora Wetlands",
-        "pt": "Aurora Wetlands"
-      },
-      "location": {
-        "en": "Concept Visualization",
-        "pt": "Visualização Conceptual"
-      },
-      "year": "2024",
-      "category": {
-        "en": "3D Visualization",
-        "pt": "Visualização 3D"
-      },
-      "description": {
-        "en": "Full visualization package for a proposed constructed wetland, produced ahead of a public planning review. Renders show the site across three seasons and at full plant maturity.",
-        "pt": "Pacote completo de visualização para uma zona húmida construída proposta, produzido antes de uma avaliação pública de planeamento. Os renders mostram o local em três estações e com a vegetação em plena maturidade."
-      },
-      "images": [
-        {
-          "alt": {
-            "en": "Aurora Wetlands — cover render",
-            "pt": "Aurora Wetlands — render principal"
-          },
-          "src": "/images/projects/aurora-wetlands/cover-800.jpg",
-          "srcset": {
-            "480": "/images/projects/aurora-wetlands/cover-480.jpg",
-            "800": "/images/projects/aurora-wetlands/cover-800.jpg",
-            "1600": "/images/projects/aurora-wetlands/cover-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Aurora Wetlands — detail render 1",
-            "pt": "Aurora Wetlands — render de detalhe 1"
-          },
-          "src": "/images/projects/aurora-wetlands/detail-1-800.jpg",
-          "srcset": {
-            "480": "/images/projects/aurora-wetlands/detail-1-480.jpg",
-            "800": "/images/projects/aurora-wetlands/detail-1-800.jpg",
-            "1600": "/images/projects/aurora-wetlands/detail-1-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Aurora Wetlands — detail render 2",
-            "pt": "Aurora Wetlands — render de detalhe 2"
-          },
-          "src": "/images/projects/aurora-wetlands/detail-2-800.jpg",
-          "srcset": {
-            "480": "/images/projects/aurora-wetlands/detail-2-480.jpg",
-            "800": "/images/projects/aurora-wetlands/detail-2-800.jpg",
-            "1600": "/images/projects/aurora-wetlands/detail-2-1600.jpg"
-          }
-        }
-      ]
-    },
-    {
-      "slug": "cedar-hollow-residence",
-      "title": {
-        "en": "Cedar Hollow Residence",
-        "pt": "Cedar Hollow Residence"
-      },
-      "location": {
-        "en": "Concept Visualization",
-        "pt": "Visualização Conceptual"
-      },
-      "year": "2022",
-      "category": {
-        "en": "3D Visualization",
-        "pt": "Visualização 3D"
-      },
-      "description": {
-        "en": "Pre-construction renders of a residential landscape for client approval, matched to the architect's massing model and lighting studies for the site's true orientation.",
-        "pt": "Renders pré-construção de uma paisagem residencial para aprovação do cliente, alinhados com o modelo volumétrico do arquiteto e estudos de luz para a orientação real do terreno."
-      },
-      "images": [
-        {
-          "alt": {
-            "en": "Cedar Hollow Residence — cover render",
-            "pt": "Cedar Hollow Residence — render principal"
-          },
-          "src": "/images/projects/cedar-hollow-residence/cover-800.jpg",
-          "srcset": {
-            "480": "/images/projects/cedar-hollow-residence/cover-480.jpg",
-            "800": "/images/projects/cedar-hollow-residence/cover-800.jpg",
-            "1600": "/images/projects/cedar-hollow-residence/cover-1600.jpg"
-          }
-        },
-        {
-          "alt": {
-            "en": "Cedar Hollow Residence — detail render 1",
-            "pt": "Cedar Hollow Residence — render de detalhe 1"
-          },
-          "src": "/images/projects/cedar-hollow-residence/detail-1-800.jpg",
-          "srcset": {
-            "480": "/images/projects/cedar-hollow-residence/detail-1-480.jpg",
-            "800": "/images/projects/cedar-hollow-residence/detail-1-800.jpg",
-            "1600": "/images/projects/cedar-hollow-residence/detail-1-1600.jpg"
-          }
-        }
-      ]
-    },
-    {
       "slug": "b",
       "title": {
         "en": "Berlin Oak Studio",
@@ -339,6 +61,46 @@
             "pt": "Imagem do projeto"
           },
           "src": "/images/uploads/1786916940486-009-2560.webp"
+        }
+      ]
+    },
+    {
+      "slug": "m",
+      "title": {
+        "en": "Morning Silence",
+        "pt": "Morning Silence"
+      },
+      "location": {
+        "en": "",
+        "pt": ""
+      },
+      "year": "",
+      "category": {
+        "en": "",
+        "pt": ""
+      },
+      "description": {
+        "en": "Morning Silence is a contemporary interior visualization exploring calm, proportion, and the quiet presence of natural light.\nThe project focuses on how daylight interacts with soft materials, restrained geometry, and a neutral palette to create a balanced and tranquil residential atmosphere. Emphasis was placed on realistic lighting, material response, and spatial clarity.\nDeveloped as a personal archviz study, this project aims to capture a moment of stillness within a contemporary bedroom interior. \n\nBased on a contemporary interior reference from loof.nl.",
+        "pt": "Morning Silence é uma visualização arquitetónica de um interior contemporâneo, centrada na calma, na proporção e na presença subtil da luz natural.\nO projeto explora a forma como a luz natural interage com materiais suaves, uma geometria depurada e uma paleta cromática neutra, criando uma atmosfera residencial equilibrada e serena. Foi dada especial atenção à iluminação realista, à resposta dos materiais e à leitura clara do espaço.\nDesenvolvido como um estudo pessoal de ArchViz, este projeto procura captar um momento de quietude no interior de um quarto contemporâneo.\n\nCom base numa referência contemporânea de interiores da loof.nl."
+      },
+      "seoDescription": {
+        "en": "",
+        "pt": ""
+      },
+      "images": [
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786919377100-01-b-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": ""
         }
       ]
     }
