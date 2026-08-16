@@ -124,6 +124,53 @@
           "src": "/images/uploads/1786920495454-05-b-2560.webp"
         }
       ]
+    },
+    {
+      "slug": "sunhill-kitchen",
+      "title": {
+        "en": "Sunhill Kitchen",
+        "pt": "Sunhill Kitchen"
+      },
+      "location": {
+        "en": "",
+        "pt": ""
+      },
+      "year": "",
+      "category": {
+        "en": "3D Visualization",
+        "pt": "Visualização 3D"
+      },
+      "description": {
+        "en": "Sunhill Kitchen is a contemporary interior visualization study focused on materiality, proportion, and the seamless integration of kitchen and living spaces.\nThe design combines warm timber detailing, soft neutral cabinetry, stone surfaces, and dark accents to create a refined and balanced residential interior. Particular attention was given to the interaction between natural light, material textures, and architectural detailing, with an emphasis on realistic material response and spatial depth.\nDeveloped as a personal ArchViz study, the project explores a restrained contemporary aesthetic through detailed modelling, lighting, composition, and material definition.\nBased on a contemporary interior reference by Nala Design.",
+        "pt": "Sunhill Kitchen é um estudo de visualização arquitetónica de um interior contemporâneo, centrado na materialidade, na proporção e na integração fluida entre a cozinha e a zona de estar.\nO projeto combina elementos de madeira natural, mobiliário em tons neutros, superfícies pétreas e apontamentos escuros, criando um interior residencial equilibrado e sofisticado. Foi dada especial atenção à relação entre a luz natural, a textura dos materiais e os detalhes arquitetónicos, com foco na resposta realista dos materiais e na criação de profundidade espacial.\nDesenvolvido como um estudo pessoal de ArchViz, o projeto explora uma linguagem contemporânea depurada através da modelação detalhada, iluminação, composição e definição de materiais.\nCom base numa referência de interiores contemporâneos do atelier Nala Design."
+      },
+      "seoDescription": {
+        "en": "",
+        "pt": ""
+      },
+      "images": [
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786921066242-01d-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786921176085-02-b-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786921233436-03-b-2560.webp"
+        }
+      ]
     }
   ]
 }
