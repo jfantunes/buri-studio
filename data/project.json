@@ -11,56 +11,6 @@
   },
   "projects": [
     {
-      "slug": "",
-      "title": {
-        "en": "Berlin Oak Studio",
-        "pt": "Berlin Oak Studio"
-      },
-      "location": {
-        "en": "Austin, TX",
-        "pt": "Austin, TX"
-      },
-      "year": "2024",
-      "category": {
-        "en": "Architectural Visualization",
-        "pt": "Visualização Arquitectónica"
-      },
-      "description": {
-        "en": "A visual study in warm minimalism, Berlin Oak Studio captures the serene atmosphere of a compact urban interior. The imagery emphasizes a grounded European aesthetic, balancing clean Scandinavian sensibilities with deliberate, high-contrast design gestures.\n\nA tailored blend of Nordic functionalism and urban sophistication, rendered to highlight the interplay of organic warmth and bold, graphic contrasts.\n\n",
-        "pt": "Estudo visual de inspiração warm minimalism, Berlin Oak Studio capta a atmosfera serena de um interior urbano compacto. A linguagem visual privilegia uma estética europeia intemporal, equilibrando a simplicidade funcional escandinava com intervenções gráficas de elevado contraste, cuidadosamente definidas através da composição, materialidade e iluminação.\n\nUma interpretação cuidada entre o funcionalismo nórdico e a sofisticação urbana, explorada através de uma visualização que evidencia o diálogo entre a organicidade dos materiais, a sensação de conforto e a presença de contrastes gráficos marcantes."
-      },
-      "images": [
-        {
-          "alt": {
-            "en": "Project image",
-            "pt": "Imagem do projeto"
-          },
-          "src": "/images/uploads/1786916057572-004b-2560.webp"
-        },
-        {
-          "alt": {
-            "en": "Project image",
-            "pt": "Imagem do projeto"
-          },
-          "src": "/images/uploads/1786916081787-007-2560.webp"
-        },
-        {
-          "alt": {
-            "en": "Project image",
-            "pt": "Imagem do projeto"
-          },
-          "src": "/images/uploads/1786916241523-005c-2560.webp"
-        },
-        {
-          "alt": {
-            "en": "Project image",
-            "pt": "Imagem do projeto"
-          },
-          "src": "/images/uploads/1786916110837-009-2560.webp"
-        }
-      ]
-    },
-    {
       "slug": "two-rivers-park",
       "title": {
         "en": "Two Rivers Park",
@@ -335,6 +285,60 @@
             "800": "/images/projects/cedar-hollow-residence/detail-1-800.jpg",
             "1600": "/images/projects/cedar-hollow-residence/detail-1-1600.jpg"
           }
+        }
+      ]
+    },
+    {
+      "slug": "b",
+      "title": {
+        "en": "Berlin Oak Studio",
+        "pt": "Berlin Oak Studio"
+      },
+      "location": {
+        "en": "",
+        "pt": ""
+      },
+      "year": "",
+      "category": {
+        "en": "Architectural Visualization",
+        "pt": "Visualização Arquitetónica"
+      },
+      "description": {
+        "en": "A visual study in warm minimalism, Berlin Oak Studio captures the serene atmosphere of a compact urban interior. The imagery emphasizes a grounded European aesthetic, balancing clean Scandinavian sensibilities with deliberate, high-contrast design gestures.\n\nA tailored blend of Nordic functionalism and urban sophistication, rendered to highlight the interplay of organic warmth and bold, graphic contrasts.",
+        "pt": "Estudo visual de inspiração warm minimalism, Berlin Oak Studio capta a atmosfera serena de um interior urbano compacto. A linguagem visual privilegia uma estética europeia depurada e intemporal, equilibrando a simplicidade funcional escandinava com intervenções gráficas de elevado contraste, cuidadosamente definidas através da composição, materialidade e iluminação.\n\nUma interpretação cuidada entre o funcionalismo nórdico e a sofisticação urbana, explorada através de uma visualização que evidencia o diálogo entre a organicidade dos materiais, a sensação de conforto e a presença de contrastes gráficos marcantes."
+      },
+      "seoDescription": {
+        "en": "",
+        "pt": ""
+      },
+      "images": [
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786916909891-004b-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786916924514-007-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786916935127-005c-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786916940486-009-2560.webp"
         }
       ]
     }
