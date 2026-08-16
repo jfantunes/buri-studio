@@ -171,6 +171,67 @@
           "src": "/images/uploads/1786921233436-03-b-2560.webp"
         }
       ]
+    },
+    {
+      "slug": "d",
+      "title": {
+        "en": "Dayton Residence",
+        "pt": "Dayton Residence"
+      },
+      "location": {
+        "en": "3D Visualization",
+        "pt": "Visualização 3D"
+      },
+      "year": "",
+      "category": {
+        "en": "",
+        "pt": ""
+      },
+      "description": {
+        "en": "Dayton Residence is a series of architectural visualizations developed for a private residential landscape design project.\nThe imagery explores the relationship between the contemporary residence and its surrounding outdoor spaces, with a focus on the pool terrace, outdoor living areas, planting, and material transitions. A restrained palette of natural stone, timber, and layered greenery creates a calm and refined landscape setting, while carefully controlled natural light and vegetation enhance the sense of depth, scale, and atmosphere.\nThe visualisations were developed to communicate the proposed landscape design through realistic representations of the architecture, planting, materials, and outdoor experience.",
+        "pt": "Dayton Residence é uma série de visualizações arquitetónicas desenvolvidas para um projeto de arquitetura paisagista residencial privado.\nAs imagens exploram a relação entre a residência contemporânea e os espaços exteriores envolventes, com especial atenção à zona da piscina, às áreas de estar exterior, à vegetação e à articulação entre diferentes materiais. Uma paleta depurada de pedra natural, madeira e vegetação cria um ambiente exterior sereno e sofisticado, enquanto a luz natural e a composição da vegetação contribuem para reforçar a profundidade, a escala e a atmosfera dos espaços.\nAs visualizações foram desenvolvidas com o objetivo de comunicar a proposta de arquitetura paisagista através de representações realistas da arquitetura, da vegetação, dos materiais e da experiência dos espaços exteriores."
+      },
+      "seoDescription": {
+        "en": "",
+        "pt": ""
+      },
+      "images": [
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786922406786-01-b-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786922416066-02-b-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786922424371-03-b-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786922432409-04-b-2560.webp"
+        },
+        {
+          "alt": {
+            "en": "Project image",
+            "pt": "Imagem do projeto"
+          },
+          "src": "/images/uploads/1786922441678-05-b-2560.webp"
+        }
+      ]
     }
   ]
 }
